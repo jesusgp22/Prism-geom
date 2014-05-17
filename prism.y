@@ -144,7 +144,7 @@ Expresion : Param {$$ = new ParamExpresion($1);}
             |Param '-' Param {$$ = new Less($1,$3);
                                 if($1->type != $3->type){yyerror("Error: Los parametros de la resta no concuerdan");} }
             |Param '*' Param {$$ = new Times($1,$3);
-                                if($1->type != $3->type){yyerror("Error: Los parametros de la multiplicacion concuerdan");} }
+                                if($1->type != $3->type){yyerror("Error: Los parametros de la multiplicacion no concuerdan");} }
             |Param '/' Param {$$ = new Division($1,$3);
                                 if($1->type != $3->type){yyerror("Error: Los parametros de la division no concuerdan");} }
 ;

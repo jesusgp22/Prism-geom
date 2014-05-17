@@ -77,7 +77,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 32 "/home/jesus/Compiladores/Prism/prism.y"
+#line 32 "/home/jesus/Workspace/Prism-geom/prism.y"
 
         float fval;
         QString* string;
@@ -102,7 +102,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 106 "/home/jesus/Compiladores/Prism/prism.tab.h"
+#line 106 "/home/jesus/Workspace/Prism-geom/prism.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

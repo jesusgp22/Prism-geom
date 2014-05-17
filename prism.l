@@ -12,7 +12,7 @@ int line = 0;
 
 
 DIGIT    [0-9]
-ID       [a-zA-Z][a-zA-Z0-9]*
+ID       [a-zA-Z_][a-zA-Z0-9_]*
 
 %%
 
