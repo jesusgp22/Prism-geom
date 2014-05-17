@@ -107,27 +107,27 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new FloatDeclaration($2,$3);
                                     check_or_insert(*$2,POINT_DT);}
                 |RECTA ID '{' Param ',' Param '}' {$$ = new RectDeclaration($2,$4,$6);
                                     check_or_insert(*$2,RECT_DT);}
-                |CURVA ID '{' '}' {$$ = new Declaration;
+                |CURVA ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CURVE_DT);}
-                |PLANO ID '{' '}' {$$ = new Declaration;
+                |PLANO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,PLANE_DT);}
                 |TRIANGULO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,TRIANGLE_DT);}
                 |CUADRILATERO ID '{' Param ',' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,QUAD_DT);}
-                |ELIPSE ID '{' '}' {$$ = new Declaration;
+                |ELIPSE ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,ELIPSE_DT);}
                 |CIRCUNFERENCIA ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CIRC_DT);}
-                |PARABOLA ID '{' '}' {$$ = new Declaration;
+                |PARABOLA ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,PARABOLE_DT);}
-                |HIPERBOLA ID '{' '}' {$$ = new Declaration;
+                |HIPERBOLA ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,HYPERBOLE_DT);}
-                |POLIEDRO ID '{' '}' {$$ = new Declaration;
+                |POLIEDRO ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,POLYHEDRON_DT);}
-                |CILINDRO ID '{' '}' {$$ = new Declaration;
+                |CILINDRO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CILINDRE_DT);}
-                |CONO ID '{' '}' {$$ = new Declaration;
+                |CONO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CONE_DT);}
                 |ESFERA ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,SPHERE_DT);}
