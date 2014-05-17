@@ -192,7 +192,9 @@ Rellenar : RELLENAR ID COLOR Param { $$ = new Fill($2,$4); check(*$2);
 }
 ;
 
-Rotar : ROTAR ID SOBRE Param Param { $$ = new Rotate($2,$4,$5);
+//TODO: NEW "PARAM" ADDED.
+
+Rotar : ROTAR ID SOBRE Param Param Param{ $$ = new Rotate($2,$4,$5);
     if(check(*$2))
     {
         Identifier* id = symbols.value(*$2);
