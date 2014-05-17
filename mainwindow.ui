@@ -205,8 +205,16 @@
     <addaction name="actionCortar"/>
     <addaction name="actionPegar"/>
    </widget>
+   <widget class="QMenu" name="menuAyuda">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="actionAcerca_de"/>
+    <addaction name="actionAyuda"/>
+   </widget>
    <addaction name="menuAYuda"/>
    <addaction name="menuEditar"/>
+   <addaction name="menuAyuda"/>
   </widget>
   <action name="actionNuevo">
    <property name="icon">
@@ -287,6 +295,16 @@
    </property>
    <property name="text">
     <string>Analizar</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de...</string>
+   </property>
+  </action>
+  <action name="actionAyuda">
+   <property name="text">
+    <string>Ayuda</string>
    </property>
   </action>
  </widget>
