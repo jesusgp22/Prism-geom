@@ -1,0 +1,9 @@
+Inicio
+Fondo NEGRO
+
+Vect3d centro (0,0,0)
+Esfera miEsfera {centro,4}
+
+Dibujar miEsfera Color GRIS
+
+Fin

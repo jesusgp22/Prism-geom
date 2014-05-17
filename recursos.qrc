@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/archivos">
+        <file>archivos/Prism.png</file>
+        <file>archivos/abrir.png</file>
+        <file>archivos/cerrar.png</file>
+        <file>archivos/copiar.png</file>
+        <file>archivos/cortar.png</file>
+        <file>archivos/guardarcomo.png</file>
+        <file>archivos/nuevo.png</file>
+        <file>archivos/pegar.png</file>
+        <file>archivos/guardar.png</file>
+    </qresource>
+</RCC>

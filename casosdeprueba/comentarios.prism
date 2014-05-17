@@ -1,0 +1,16 @@
+**************************************
+Este programa dibuja un triangulo Azul
+**************************************
+Inicio
+
+vect2d a (0,0);
+vect2d b (1,0);
+vect3d c (0,1);
+Triangulo T1 {a,b,c};
+
+Dibujar T1 Color AZUL Borde NEGRO;
+
+Fin
+**************************************
+Ahora termina la compilacion
+**************************************

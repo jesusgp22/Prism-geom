@@ -1,0 +1,12 @@
+Inicio
+
+Fondo GRIS
+	
+Flotante radioBase 10
+Flotante altura 20
+Vector3d posicion (0,0,0)
+Vector3d vectorUp (0,1,0)
+
+Dibujar Cono{posicion,radioBase,altura,vectorUp} Color NEGRO
+
+Fin
