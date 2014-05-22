@@ -90,7 +90,19 @@ void MainWindow::on_pushButton_clicked()
         type += i.value()->type_string();
         this->ui->tableWidget->setItem(row,1,new QTableWidgetItem(type));
         if(!i.value()->referenced){
+
+            // save old color
+            int fw = ui->consola->fontWeight();
+            QColor tc = ui->consola->textColor();
+
+            // append
+            ui->consola->setFontWeight( QFont::DemiBold );
+            ui->consola->setTextColor( QColor( "red" ) );
             this->ui->consola->append("Advertencia: Variable \"" + i.value()->name + "\" declarada pero nunca se usa");
+
+            // restore old color
+            ui->consola->setFontWeight( fw );
+            ui->consola->setTextColor( tc );
         }
         //cout << i.key() << ": " << i.value()-> << endl;
         ++i;
@@ -98,10 +110,25 @@ void MainWindow::on_pushButton_clicked()
     }
 
     if(errors>0){
+
         QString m = "Analisis finalizo con ";
         m+=QString::number(errors);
         m+=" error(es)";
+
+        // save old color
+        int fw = ui->consola->fontWeight();
+        QColor tc = ui->consola->textColor();
+
+        // append
+        ui->consola->setFontWeight( QFont::DemiBold );
+        ui->consola->setTextColor( QColor( "red" ) );
         ui->consola->append(m);
+
+        // restore old color
+        ui->consola->setFontWeight( fw );
+        ui->consola->setTextColor( tc );
+
+
     }
     errors = 0;
 

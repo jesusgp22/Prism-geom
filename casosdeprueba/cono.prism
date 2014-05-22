@@ -8,6 +8,6 @@ Vector3d posicion (0,0,0);
 Vector3d vectorUp (0,1,0);
 
 Cono miCono {posicion,radioBase,altura};
-Dibujar miCono Color NEGRO;
+Dibujar miCono;
 
 Fin
