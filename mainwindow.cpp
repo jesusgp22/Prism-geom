@@ -132,6 +132,9 @@ void MainWindow::on_pushButton_clicked()
     }
     errors = 0;
 
+    for(int i=0;i<root->sentence_list->size();i++){
+        root->sentence_list->at(i)->GenerateCode();
+    }
 }
 
 

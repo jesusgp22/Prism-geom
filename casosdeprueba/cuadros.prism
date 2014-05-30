@@ -1,5 +1,6 @@
 Inicio
 
+Flotante s 1.453;
 Vector2d a (1,1);
 Vector2d b (1,-1);
 Vector3d c (-1,1,0);
@@ -7,11 +8,9 @@ Vector2d d (-1,-1);
 
 Cuadrilatero Cuad {a,b,c,d};
 
-Dibujar Cuad Color (1,0,0,0.5)
+Dibujar Cuad Color (1,0,0,0.5);
 
-Rotar Cuad Sobre (0,0) 30;
-
-Dibujar Cuad Color (0,1,0,-5);
+Dibujar Cuad Color (0,1,0,0.5);
 
 
 Fin

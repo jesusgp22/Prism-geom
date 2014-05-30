@@ -10,7 +10,7 @@ extern QHash<QString, Identifier*> symbols;
 
 enum DATATYPE{FLOAT_DT,VECT2_DT,VECT3_DT,COLOR_DT,POINT_DT,RECT_DT,CURVE_DT,PLANE_DT,TRIANGLE_DT,QUAD_DT,ELIPSE_DT,CIRC_DT,
               PARABOLE_DT,HYPERBOLE_DT,
-             POLYHEDRON_DT,CILINDRE_DT,CONE_DT,SPHERE_DT,NONE_DT};
+              POLYHEDRON_DT,CILINDRE_DT,CONE_DT,SPHERE_DT,NONE_DT};
 
 class Identifier{
 public:
@@ -173,6 +173,8 @@ public:
 //ROOT CLASS
 
 class Sentence{
+public:
+    virtual void GenerateCode(){ qDebug()<<"Implement this function"; }
 };
 
 class Root {
@@ -181,28 +183,29 @@ public:
     std::vector<Sentence*> *sentence_list;
 };
 
-
-
-
 //DECLARATION CLASSES:
-
 
 class Declaration : public Sentence{
 public:
     QString* id;
 };
 
-
 class FloatDeclaration : public Declaration{
 public:
-    FloatDeclaration(QString*id,float fval){this->f=fval;this->id=id;}
+    FloatDeclaration(QString* id,float fval){this->f=fval;this->id=id;}
     float f;
+    void GenerateCode(){
+        qDebug()<<"Declarando un flotante con id: "<<*this->id<<" valor: "<<this->f;
+    }
 };
 
 class Vect2dDeclaration : public Declaration{
 public:
     Vect2dDeclaration(QString*id,Vect2d *v2d){this->id=id;this->v2d=v2d;}
     Vect2d *v2d;
+    void GenerateCode(){
+        qDebug()<<"Declarando un Vector2d con id: "<<*this->id<<" valor: "<<this->v2d->x<<","<<this->v2d->y;
+    }
 };
 
 class Vect3dDeclaration : public Declaration{
