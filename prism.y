@@ -14,7 +14,7 @@
 
     int errors = 0;
 
-    void check_or_insert(QString,DATATYPE,void *);
+    void check_or_insert(QString,DATATYPE,DataType *);
     bool check(QString);
     //QT interface variable;
     QString syntax;
@@ -96,7 +96,7 @@ Sentencia : Declaracion ';' {$$ = $1;}
 ; 
 
 Declaracion : FLOTANTE ID PTO_FLOT {$$ = new FloatDeclaration($2,*$3);
-                                    check_or_insert(*$2,FLOAT_DT,$3);}
+                                    check_or_insert(*$2,FLOAT_DT,new Float(*$3));}
                 |VECT2D ID Vect2d {$$ = new Vect2dDeclaration($2,$3);
                                     check_or_insert(*$2,VECT2_DT,$3);}
                 |VECT3D ID Vect3d {$$ = new Vect3dDeclaration($2,$3);
@@ -106,18 +106,25 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new FloatDeclaration($2,*$3);
 
                 |PUNTO ID '{' Param '}' {$$ = new PointDeclaration($2,$4);
                                     check_or_insert(*$2,POINT_DT,new Point($4));}
+
                 |RECTA ID '{' Param ',' Param '}' {$$ = new RectDeclaration($2,$4,$6);
                                     check_or_insert(*$2,RECT_DT,new Rect($4,$6));}
+
                 |CURVA ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CURVE_DT,new Curve($4,$6,$8));}
+
                 |PLANO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,PLANE_DT,new Plane($4,$6,$8));}
+
                 |TRIANGULO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,TRIANGLE_DT,new Triangle($4,$6,$8));}
+
                 |CUADRILATERO ID '{' Param ',' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,QUAD_DT,new Quad($4,$6,$8,$10));}
+
                 |ELIPSE ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,ELIPSE_DT,new Elipse($4,$6,$8));}
+
                 |CIRCUNFERENCIA ID '{' Param ',' Param '}' {$$ = new Declaration;
                                     check_or_insert(*$2,CIRC_DT,new Circ($4,$6));}
                 |PARABOLA ID '{' Param ',' Param '}' {$$ = new Declaration;
@@ -141,20 +148,20 @@ Asignacion : ID '=' Expresion {$$ = new Asignation($1,$3);
 
 Expresion : Param {$$ = new ParamExpresion($1);}
             |Param '+' Param {$$ = new Plus($1,$3);
-                                if($1->type != $3->type){yyerror("Error: Los parametros de la suma no concuerdan");} }
+                                if($1->type != $3->type){yyerror("ERROR: Los parametros de la suma no concuerdan");} }
             |Param '-' Param {$$ = new Less($1,$3);
-                                if($1->type != $3->type){yyerror("Error: Los parametros de la resta no concuerdan");} }
+                                if($1->type != $3->type){yyerror("ERROR: Los parametros de la resta no concuerdan");} }
             |Param '*' Param {$$ = new Times($1,$3);
-                                if($1->type != $3->type){yyerror("Error: Los parametros de la multiplicacion no concuerdan");} }
+                                if($1->type != $3->type){yyerror("ERROR: Los parametros de la multiplicacion no concuerdan");} }
             |Param '/' Param {$$ = new Division($1,$3);
-                                if($1->type != $3->type){yyerror("Error: Los parametros de la division no concuerdan");} }
+                                if($1->type != $3->type){yyerror("ERROR: Los parametros de la division no concuerdan");} }
 ;
 
 Param : Color {$$= new Param(COLOR_DT,(void*)$1);}
         |PTO_FLOT {$$= new Param(FLOAT_DT,(void*)$1);}
         |Vect2d {$$= new Param(VECT2_DT,(void*)$1);}
         |Vect3d {$$= new Param(VECT3_DT,(void*)$1);}
-        |ID { if(check(*$1)) {$$ = new Param($1);}}
+        |ID { if(check(*$1)) {$$ = new Param($1);} else{ $$ = new Param(); } }
 ;
 
 Funcion : Dibujar {$$=$1;}
@@ -261,7 +268,7 @@ Vect3d: '(' PTO_FLOT ',' PTO_FLOT ',' PTO_FLOT ')' {$$=new Vect3d(*$2,*$4,*$6);}
          
 %% 
 
-void check_or_insert(QString name,DATATYPE t,void * value){
+void check_or_insert(QString name,DATATYPE t,DataType * value){
     if(symbols.contains(name))
     {
         yyerror("ERROR: No se puede redefinir una variable ya declarada" );

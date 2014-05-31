@@ -80,36 +80,42 @@ void MainWindow::on_pushButton_clicked()
 
 
 
+    if(errors==0){
+        QHash<QString, Identifier*>::const_iterator i = symbols.constBegin();
+        int row = 0;
+        while (i != symbols.constEnd()) {
+            this->ui->tableWidget->insertRow(row);
+            this->ui->tableWidget->setItem(row,0,new QTableWidgetItem(i.key()));
+            QString type = i.value()->dimension_string();
+            type += i.value()->type_string();
+            this->ui->tableWidget->setItem(row,1,new QTableWidgetItem(type));
+            QString value = i.value()->value->getValueString();
+            this->ui->tableWidget->setItem(row,2,new QTableWidgetItem(value));
+            if(!i.value()->referenced){
 
-    QHash<QString, Identifier*>::const_iterator i = symbols.constBegin();
-    int row = 0;
-    while (i != symbols.constEnd()) {
-        this->ui->tableWidget->insertRow(row);
-        this->ui->tableWidget->setItem(row,0,new QTableWidgetItem(i.key()));
-        QString type = i.value()->dimension_string();
-        type += i.value()->type_string();
-        this->ui->tableWidget->setItem(row,1,new QTableWidgetItem(type));
-        if(!i.value()->referenced){
+                // save old color
+                int fw = ui->consola->fontWeight();
+                QColor tc = ui->consola->textColor();
 
-            // save old color
-            int fw = ui->consola->fontWeight();
-            QColor tc = ui->consola->textColor();
+                // append
+                ui->consola->setFontWeight( QFont::DemiBold );
+                ui->consola->setTextColor( QColor( "red" ) );
+                this->ui->consola->append("Advertencia: Variable \"" + i.value()->name + "\" declarada pero nunca se usa");
 
-            // append
-            ui->consola->setFontWeight( QFont::DemiBold );
-            ui->consola->setTextColor( QColor( "red" ) );
-            this->ui->consola->append("Advertencia: Variable \"" + i.value()->name + "\" declarada pero nunca se usa");
-
-            // restore old color
-            ui->consola->setFontWeight( fw );
-            ui->consola->setTextColor( tc );
+                // restore old color
+                ui->consola->setFontWeight( fw );
+                ui->consola->setTextColor( tc );
+            }
+            //cout << i.key() << ": " << i.value()-> << endl;
+            ++i;
+            ++row;
         }
-        //cout << i.key() << ": " << i.value()-> << endl;
-        ++i;
-        ++row;
-    }
 
-    if(errors>0){
+
+        for(int i=0;i<root->sentence_list->size();i++){
+            root->sentence_list->at(i)->GenerateCode();
+        }
+    }else{
 
         QString m = "Analisis finalizo con ";
         m+=QString::number(errors);
@@ -132,9 +138,6 @@ void MainWindow::on_pushButton_clicked()
     }
     errors = 0;
 
-    for(int i=0;i<root->sentence_list->size();i++){
-        root->sentence_list->at(i)->GenerateCode();
-    }
 }
 
 

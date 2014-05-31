@@ -83,7 +83,7 @@
 
     int errors = 0;
 
-    void check_or_insert(QString,DATATYPE,void *);
+    void check_or_insert(QString,DATATYPE,DataType *);
     bool check(QString);
     //QT interface variable;
     QString syntax;
@@ -522,11 +522,11 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint16 yyrline[] =
 {
        0,    84,    84,    89,    90,    93,    94,    95,    98,   100,
-     102,   104,   107,   109,   111,   113,   115,   117,   119,   121,
-     123,   125,   127,   129,   131,   133,   137,   142,   143,   145,
-     147,   149,   153,   154,   155,   156,   157,   160,   161,   162,
-     163,   164,   165,   168,   180,   196,   213,   228,   243,   253,
-     256,   259
+     102,   104,   107,   110,   113,   116,   119,   122,   125,   128,
+     130,   132,   134,   136,   138,   140,   144,   149,   150,   152,
+     154,   156,   160,   161,   162,   163,   164,   167,   168,   169,
+     170,   171,   172,   175,   187,   203,   220,   235,   250,   260,
+     263,   266
 };
 #endif
 
@@ -1623,7 +1623,7 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 98 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new FloatDeclaration((yyvsp[(2) - (3)].string),*(yyvsp[(3) - (3)].fval));
-                                    check_or_insert(*(yyvsp[(2) - (3)].string),FLOAT_DT,(yyvsp[(3) - (3)].fval));}
+                                    check_or_insert(*(yyvsp[(2) - (3)].string),FLOAT_DT,new Float(*(yyvsp[(3) - (3)].fval)));}
     break;
 
   case 9:
@@ -1661,7 +1661,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 109 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 110 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new RectDeclaration((yyvsp[(2) - (7)].string),(yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),RECT_DT,new Rect((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1669,7 +1669,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 111 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 113 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CURVE_DT,new Curve((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1677,7 +1677,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 113 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 116 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),PLANE_DT,new Plane((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1685,7 +1685,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 115 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 119 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),TRIANGLE_DT,new Triangle((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1693,7 +1693,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 117 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 122 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (11)].string),QUAD_DT,new Quad((yyvsp[(4) - (11)].param),(yyvsp[(6) - (11)].param),(yyvsp[(8) - (11)].param),(yyvsp[(10) - (11)].param)));}
     break;
@@ -1701,7 +1701,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 119 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 125 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),ELIPSE_DT,new Elipse((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1709,7 +1709,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 121 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 128 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (7)].string),CIRC_DT,new Circ((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1717,7 +1717,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 123 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 130 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (7)].string),PARABOLE_DT,new Parabole((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1725,7 +1725,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 125 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 132 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (7)].string),HYPERBOLE_DT,new Parabole((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1733,7 +1733,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 127 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 134 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (7)].string),POLYHEDRON_DT,new Polyhedron((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1741,7 +1741,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 129 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 136 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CILINDRE_DT,new Cilindre((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1749,7 +1749,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 131 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 138 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CONE_DT,new Cone((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));}
     break;
@@ -1757,7 +1757,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 133 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 140 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration;
                                     check_or_insert(*(yyvsp[(2) - (7)].string),SPHERE_DT,new Sphere((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));}
     break;
@@ -1765,7 +1765,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 137 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 144 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.asignation) = new Asignation((yyvsp[(1) - (3)].string),(yyvsp[(3) - (3)].expresion));
                                 check(*(yyvsp[(1) - (3)].string));
                               }
@@ -1774,123 +1774,123 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 142 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 149 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new ParamExpresion((yyvsp[(1) - (1)].param));}
     break;
 
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 143 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 150 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Plus((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
-                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("Error: Los parametros de la suma no concuerdan");} }
+                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la suma no concuerdan");} }
     break;
 
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 145 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 152 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Less((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
-                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("Error: Los parametros de la resta no concuerdan");} }
+                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la resta no concuerdan");} }
     break;
 
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 147 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 154 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Times((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
-                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("Error: Los parametros de la multiplicacion no concuerdan");} }
+                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la multiplicacion no concuerdan");} }
     break;
 
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 149 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 156 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Division((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
-                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("Error: Los parametros de la division no concuerdan");} }
+                                if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la division no concuerdan");} }
     break;
 
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 153 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 160 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(COLOR_DT,(void*)(yyvsp[(1) - (1)].color));}
     break;
 
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 154 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 161 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(FLOAT_DT,(void*)(yyvsp[(1) - (1)].fval));}
     break;
 
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 155 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 162 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(VECT2_DT,(void*)(yyvsp[(1) - (1)].vect2d));}
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 156 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 163 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(VECT3_DT,(void*)(yyvsp[(1) - (1)].vect3d));}
     break;
 
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 157 "/home/jesus/Workspace/Prism-geom/prism.y"
-    { if(check(*(yyvsp[(1) - (1)].string))) {(yyval.param) = new Param((yyvsp[(1) - (1)].string));}}
+#line 164 "/home/jesus/Workspace/Prism-geom/prism.y"
+    { if(check(*(yyvsp[(1) - (1)].string))) {(yyval.param) = new Param((yyvsp[(1) - (1)].string));} else{ (yyval.param) = new Param(); } }
     break;
 
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 160 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 167 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].draw);}
     break;
 
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 161 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 168 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].fill);}
     break;
 
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 162 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 169 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].rotate);}
     break;
 
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 163 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 170 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].translate);}
     break;
 
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 164 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 171 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].scale);}
     break;
 
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 165 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 172 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)= new Background((yyvsp[(2) - (2)].param));}
     break;
 
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 168 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 175 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.draw) = new Draw((yyvsp[(2) - (4)].string),(yyvsp[(4) - (4)].param));
     if(check(*(yyvsp[(2) - (4)].string)))
     {
@@ -1906,7 +1906,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 180 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 187 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.fill) = new Fill((yyvsp[(2) - (4)].string),(yyvsp[(4) - (4)].param)); check(*(yyvsp[(2) - (4)].string));
     if(check(*(yyvsp[(2) - (4)].string)))
     {
@@ -1924,7 +1924,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 196 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 203 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.rotate) = new Rotate((yyvsp[(2) - (6)].string),(yyvsp[(4) - (6)].param),(yyvsp[(5) - (6)].param));
     if(check(*(yyvsp[(2) - (6)].string)))
     {
@@ -1945,7 +1945,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 213 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 220 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.scale) = new Scale((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].param));
 if(check(*(yyvsp[(2) - (3)].string)))
 {
@@ -1964,7 +1964,7 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 228 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 235 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.translate) = new Translate((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].param));
     if(check(*(yyvsp[(2) - (3)].string)))
     {
@@ -1983,7 +1983,7 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 243 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 250 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.color)=new Color(*(yyvsp[(2) - (9)].fval),*(yyvsp[(4) - (9)].fval),*(yyvsp[(6) - (9)].fval),*(yyvsp[(8) - (9)].fval));
                                                                 if(*(yyvsp[(2) - (9)].fval)<0||*(yyvsp[(2) - (9)].fval)>1)
                                                                     yyerror("ERROR: El componente de rojo del color debe estar entre 0 y 1");
@@ -1999,21 +1999,21 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 253 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 260 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.color)=new Color((yyvsp[(1) - (1)].string));}
     break;
 
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 256 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 263 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.vect2d)=new Vect2d(*(yyvsp[(2) - (5)].fval),*(yyvsp[(4) - (5)].fval));}
     break;
 
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 259 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 266 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.vect3d)=new Vect3d(*(yyvsp[(2) - (7)].fval),*(yyvsp[(4) - (7)].fval),*(yyvsp[(6) - (7)].fval));}
     break;
 
@@ -2251,10 +2251,10 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 262 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 269 "/home/jesus/Workspace/Prism-geom/prism.y"
  
 
-void check_or_insert(QString name,DATATYPE t,void * value){
+void check_or_insert(QString name,DATATYPE t,DataType * value){
     if(symbols.contains(name))
     {
         yyerror("ERROR: No se puede redefinir una variable ya declarada" );
