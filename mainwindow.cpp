@@ -113,7 +113,7 @@ void MainWindow::on_pushButton_clicked()
 
 
         for(int i=0;i<root->sentence_list->size();i++){
-            //root->sentence_list->at(i)->GenerateCode();
+            root->sentence_list->at(i)->GenerateCode();
         }
     }else{
 

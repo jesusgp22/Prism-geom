@@ -20,6 +20,7 @@ public:
     virtual QString getValueString(){
         return "Undefined";
     }
+    virtual void Draw(){}
 };
 
 //INDENTIFIER CLASS
@@ -106,7 +107,7 @@ public:
 
 class Float: public DataType{
 public:
-    Float(float f){this->f=f; qDebug()<<"Creado un nuevo FLOTANTE con valor:"<<QString::number(f);}
+    Float(float f){this->f=f;}
     float f;
     QString getValueString(){
         return QString::number(f);
@@ -228,6 +229,9 @@ public:
     Vect2d* point;
     QString getValueString(){
         return "posicion: "+point->getValueString();
+    }
+    void Draw(){
+        qDebug()<<"dibujando un punto";
     }
 };
 
@@ -476,7 +480,7 @@ public:
 
 class Sentence{
 public:
-    virtual void GenerateCode(){ qDebug()<<"Implement this function"; }
+    virtual void GenerateCode(){  }
 };
 
 class Root {
@@ -496,18 +500,12 @@ class FloatDeclaration : public Declaration{
 public:
     FloatDeclaration(QString* id,float fval){this->f=fval;this->id=id;}
     float f;
-    void GenerateCode(){
-        qDebug()<<"Declarando un flotante con id: "<<*this->id<<" valor: "<<this->f;
-    }
 };
 
 class Vect2dDeclaration : public Declaration{
 public:
     Vect2dDeclaration(QString*id,Vect2d *v2d){this->id=id;this->v2d=v2d;}
     Vect2d *v2d;
-    void GenerateCode(){
-        qDebug()<<"Declarando un Vector2d con id: "<<*this->id<<" valor: "<<this->v2d->x<<","<<this->v2d->y;
-    }
 };
 
 class Vect3dDeclaration : public Declaration{
@@ -526,13 +524,6 @@ class PointDeclaration : public Declaration{
 public:
     PointDeclaration(QString*id,Param* p){this->id=id;this->p=p;}
     Param* p;
-    void GenerateCode(){
-        if(p->type==VECT2_DT){
-            Vect2d vect = *(Vect2d*)p->value;
-            qDebug()<<"Declarando un punto con id:"<<*this->id<<"punto:"<<vect.x<<","<<vect.y;
-        }
-
-    }
 };
 
 class RectDeclaration : public Declaration{
@@ -601,6 +592,12 @@ public:
     Draw(QString*id,Param* c){this->id=id;this->color=c;}
     QString*id;
     Param* color;
+    void GenerateCode(){
+        Color *c = (Color*)color->value;
+        qDebug()<<"dibujando el id"<<*id<<"con color: "<<c->getValueString();
+        Identifier *i = symbols.value(*id);
+        i->value->Draw();
+    }
 };
 
 class Background : public Function{

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,12 +16,14 @@ SOURCES +=\
     mainwindow.cpp \
     main.cpp \
     prism.tab.cpp \
-    lex.yy.cpp
+    lex.yy.cpp \
+    viewport.cpp
 
 HEADERS  += mainwindow.h \
     prism.tab.h \
     ast.h \
-    ast_declaration.h
+    ast_declaration.h \
+    viewport.h
 
 FORMS    += mainwindow.ui
 
@@ -31,3 +33,6 @@ RESOURCES += \
 OTHER_FILES += \
     prism.y \
     prism.l
+
+LIBS += -L/usr/local/lib -lglut \
+        -L/usr/local/lib -lGLU
