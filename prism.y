@@ -105,40 +105,96 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new FloatDeclaration($2,*$3);
                                     check_or_insert(*$2,COLOR_DT,$3);}
 
                 |PUNTO ID '{' Param '}' {$$ = new PointDeclaration($2,$4);
-                                    check_or_insert(*$2,POINT_DT,new Point($4));}
+                                    check_or_insert(*$2,POINT_DT,new Point($4));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: La posicion del punto debe ser Vector2d\nPrototipo: Punto {Vector2d posicion}");}
+                                    }
 
                 |RECTA ID '{' Param ',' Param '}' {$$ = new RectDeclaration($2,$4,$6);
-                                    check_or_insert(*$2,RECT_DT,new Rect($4,$6));}
+                                    check_or_insert(*$2,RECT_DT,new Rect($4,$6));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Recta {Vector2d a,Vector2d b}");}
+                                    if($6->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Recta {Vector2d a,Vector2d b}");}
+                                    }
 
                 |CURVA ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,CURVE_DT,new Curve($4,$6,$8));}
+                                    check_or_insert(*$2,CURVE_DT,new Curve($4,$6,$8));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
+                                    if($6->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
+                                    if($8->type!=VECT2_DT){yyerror("ERROR: El punto \"c\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
+                                    }
+
 
                 |PLANO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,PLANE_DT,new Plane($4,$6,$8));}
+                                    check_or_insert(*$2,PLANE_DT,new Plane($4,$6,$8));
+                                    if($4->type!=VECT3_DT){yyerror("ERROR: El punto \"a\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
+                                    if($6->type!=VECT3_DT){yyerror("ERROR: El punto \"b\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
+                                    if($8->type!=VECT3_DT){yyerror("ERROR: El punto \"c\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
+                                    }
 
                 |TRIANGULO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,TRIANGLE_DT,new Triangle($4,$6,$8));}
+                                    check_or_insert(*$2,TRIANGLE_DT,new Triangle($4,$6,$8));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
+                                    if($6->type!=VECT2_DT){yyerror("ERROR: El vertice \"b\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
+                                    if($8->type!=VECT2_DT){yyerror("ERROR: El vertice \"c\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
+                                    }
 
                 |CUADRILATERO ID '{' Param ',' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,QUAD_DT,new Quad($4,$6,$8,$10));}
+                                    check_or_insert(*$2,QUAD_DT,new Quad($4,$6,$8,$10));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
+                                    if($6->type!=VECT2_DT){yyerror("ERROR: El vertice \"b\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
+                                    if($8->type!=VECT2_DT){yyerror("ERROR: El vertice \"c\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
+                                    if($10->type!=VECT2_DT){yyerror("ERROR: El vertice \"d\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
+                                    }
 
                 |ELIPSE ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,ELIPSE_DT,new Elipse($4,$6,$8));}
+                                    check_or_insert(*$2,ELIPSE_DT,new Elipse($4,$6,$8));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El ancho debe ser Flotante\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
+                                    if($8->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
+                                    }
 
                 |CIRCUNFERENCIA ID '{' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,CIRC_DT,new Circ($4,$6));}
+                                    check_or_insert(*$2,CIRC_DT,new Circ($4,$6));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Circunferencia {Vector2d centro,Flotante radio}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Circunferencia {Vector2d centro,Flotante radio}");}
+                                    }
+
                 |PARABOLA ID '{' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,PARABOLE_DT,new Parabole($4,$6));}
+                                    check_or_insert(*$2,PARABOLE_DT,new Parabole($4,$6));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
+                                    }
+
                 |HIPERBOLA ID '{' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,HYPERBOLE_DT,new Parabole($4,$6));}
+                                    check_or_insert(*$2,HYPERBOLE_DT,new Parabole($4,$6));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
+                                    }
+
                 |POLIEDRO ID '{' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,POLYHEDRON_DT,new Polyhedron($4,$6));}
+                                    check_or_insert(*$2,POLYHEDRON_DT,new Polyhedron($4,$6));
+                                    if($4->type!=FLOAT_DT){yyerror("ERROR: El numero de caras debe ser Flotante\nPrototipo: Poliedro {Flotante num_caras,Flotante num_lados}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El numero de lados debe ser Flotante\nPrototipo: Poliedro {Flotante num_caras,Flotante num_lados}");}
+                                    }
+
                 |CILINDRO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,CILINDRE_DT,new Cilindre($4,$6,$8));}
+                                    check_or_insert(*$2,CILINDRE_DT,new Cilindre($4,$6,$8));
+                                    if($4->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    if($8->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    }
+
                 |CONO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,CONE_DT,new Cone($4,$6,$8));}
+                                    check_or_insert(*$2,CONE_DT,new Cone($4,$6,$8));
+                                    if($4->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    if($8->type!=FLOAT_DT){yyerror("ERROR: El radio de la base debe ser Flotante\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
+                                    }
+
                 |ESFERA ID '{' Param ',' Param '}' {$$ = new Declaration;
-                                    check_or_insert(*$2,SPHERE_DT,new Sphere($4,$6));}
+                                    check_or_insert(*$2,SPHERE_DT,new Sphere($4,$6));
+                                    if($4->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Esfera {Vector3d centro,Flotante radio}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Esfera {Vector3d centro,Flotante radio}");}
+                                    }
 ;
 
 Asignacion : ID '=' Expresion {$$ = new Asignation($1,$3);

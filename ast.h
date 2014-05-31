@@ -638,8 +638,4 @@ public:
     Param* vect;
 };
 
-
-
-
-
 #endif // AST_H
