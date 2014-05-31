@@ -893,7 +893,7 @@ case 1:
 YY_RULE_SETUP
 #line 20 "/home/jesus/Workspace/Prism-geom/prism.l"
 {    tokens+="<PTO_FLOT>, \""; tokens+=yytext; tokens+="\"\n";
-                                                                        yylval.fval = atof(yytext);
+                                                                        yylval.fval = new float(atof(yytext));
 									return PTO_FLOT;}
 	YY_BREAK
 case 2:

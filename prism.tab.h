@@ -79,7 +79,7 @@ typedef union YYSTYPE
 /* Line 2068 of yacc.c  */
 #line 32 "/home/jesus/Workspace/Prism-geom/prism.y"
 
-        float fval;
+        float* fval;
         QString* string;
         std::vector<Sentence*>* sentence_list;
         Sentence* sentence;

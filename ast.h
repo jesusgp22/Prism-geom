@@ -5,20 +5,25 @@
 #include<QString>
 #include<QHash>
 #include<QDebug>
+
+//SYMBOL TABLE
 class Identifier;
 extern QHash<QString, Identifier*> symbols;
 
+//DATA TYPES
 enum DATATYPE{FLOAT_DT,VECT2_DT,VECT3_DT,COLOR_DT,POINT_DT,RECT_DT,CURVE_DT,PLANE_DT,TRIANGLE_DT,QUAD_DT,ELIPSE_DT,CIRC_DT,
               PARABOLE_DT,HYPERBOLE_DT,
               POLYHEDRON_DT,CILINDRE_DT,CONE_DT,SPHERE_DT,NONE_DT};
 
+//INDENTIFIER CLASS
 class Identifier{
 public:
 
     enum ID_DIMENSION{GEOM2D,GEOM3D,NONE};
-    Identifier(QString name,DATATYPE t){
+    Identifier(QString name,DATATYPE t,void * value){
         this->name=name;
         this->type=t;
+        this->value = value;
         if(t==VECT2_DT||t==POINT_DT||t==RECT_DT||t==CURVE_DT||t==PLANE_DT||t==TRIANGLE_DT||t==QUAD_DT
                 ||t==ELIPSE_DT||t==CIRC_DT||t==PARABOLE_DT||t==HYPERBOLE_DT)
         {
@@ -37,6 +42,7 @@ public:
     ID_DIMENSION dimension;
     QString name;
     bool referenced;
+    void * value;
     QString type_string(){
         switch (type) {
         case FLOAT_DT:
@@ -111,12 +117,56 @@ public:
 class Color{
 public:
     Color(float r,float g,float b,float a){this->red=r;this->green=g;this->blue=b;this->alpha=a;}
-    Color(QString* c)
-    {
-        if(c)
-            this->alpha=0;
-
+    Color(QString* c){
+        this->alpha=0;
+        QString name=*c;
+        if(name=="NEGRO"){
+            this->red=0;
+            this->green=0;
+            this->blue=0;
+        }else if(name=="AZUL"){
+            this->red=0;
+            this->green=0;
+            this->blue=255;
+        }else if(name=="CIAN"){
+            this->red=0;
+            this->green=176;
+            this->blue=246;
+        }else if(name=="GIS"){
+            this->red=152;
+            this->green=152;
+            this->blue=152;
+        }else if(name=="VERDE"){
+            this->red=0;
+            this->green=255;
+            this->blue=0;
+        }else if(name=="MAGENTA"){
+            this->red=245;
+            this->green=0;
+            this->blue=135;
+        }else if(name=="NARANJA"){
+            this->red=230;
+            this->green=95;
+            this->blue=0;
+        }else if(name=="ROSADO"){
+            this->red=247;
+            this->green=191;
+            this->blue=190;
+        }else if(name=="ROJO"){
+            this->red=255;
+            this->green=0;
+            this->blue=0;
+        }else if(name=="BLANCO"){
+            this->red=1;
+            this->green=1;
+            this->blue=1;
+        }else if(name=="AMARILLO"){
+            this->red=255;
+            this->green=233;
+            this->blue=0;
+        }
     }
+
     float red;
     float green;
     float blue;
@@ -125,52 +175,222 @@ public:
 
 class Param{
 public:
-    DATATYPE type;
-    bool isID;
-};
-
-class Vect2dParam : public Param{
-public:
-    Vect2dParam(Vect2d* v){this->v2d=v;type=VECT2_DT;this->isID=false;}
-    Vect2d* v2d;
-};
-
-class Vect3dParam : public Param{
-public:
-    Vect3dParam(Vect3d* v){this->v3d=v;type=VECT3_DT;this->isID=false;}
-    Vect3d* v3d;
-
-};
-
-class IdParam : public Param{
-public:
-    IdParam(QString* id){
-        this->isID =true;
-        if(symbols.contains(*id)){
-            this->id=symbols.value(*id);
-            this->type=this->id->type;
-        }else{
-            this->id=NULL;
-            this->type=NONE_DT;
-        }
+    Param(DATATYPE type, void* value){
+        this->type=type;
+        this->value=value;
     }
-    Identifier* id;
+    Param(QString* id){
+        Identifier* identifier =  symbols[*id];
+        this->type=identifier->type;
+        this->value=identifier->value;
+    }
+    DATATYPE type;
+    void * value;
 };
 
-class FloatParam : public Param{
+class Point{
 public:
-    FloatParam(float f){this->f=f;type=FLOAT_DT;this->isID=false;}
-    float f;
+    Point(Param *p){
+        if(p->type==VECT2_DT)
+        point = (Vect2d*)p->value;
+    }
+    Vect2d* point;
 };
 
-class ColorParam : public Param{
+class Rect{
 public:
-    ColorParam(Color* c){this->color = c;type=COLOR_DT;this->isID=false;}
-    Color* color;
+    Rect(Param *p1,Param *p2){
+        if(p1->type==VECT2_DT)
+            this->a = (Vect2d*)p1->value;
+        if(p2->type==VECT2_DT)
+            this->a = (Vect2d*)p2->value;
+    }
+    Vect2d* a;
+    Vect2d* b;
+};
+
+class Curve{
+public:
+    Curve(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT2_DT)
+            this->a = (Vect2d*)p1->value;
+        if(p2->type==VECT2_DT)
+            this->b = (Vect2d*)p2->value;
+        if(p2->type==VECT2_DT)
+            this->c = (Vect2d*)p3->value;
+    }
+    Vect2d* a;
+    Vect2d* b;
+    Vect2d* c;
 };
 
 
-//ROOT CLASS
+class Plane{
+public:
+    Plane(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT3_DT)
+            this->a = (Vect3d*)p1->value;
+        if(p2->type==VECT3_DT)
+            this->b = (Vect3d*)p2->value;
+        if(p2->type==VECT3_DT)
+            this->c = (Vect3d*)p3->value;
+    }
+    Vect3d* a;
+    Vect3d* b;
+    Vect3d* c;
+};
+
+class Triangle{
+public:
+    Triangle(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT2_DT)
+            this->a = (Vect2d*)p1->value;
+        if(p2->type==VECT2_DT)
+            this->b = (Vect2d*)p2->value;
+        if(p2->type==VECT2_DT)
+            this->c = (Vect2d*)p3->value;
+    }
+    Vect2d* a;
+    Vect2d* b;
+    Vect2d* c;
+
+};
+
+class Quad{
+public:
+    Quad(Param *p1,Param *p2,Param *p3,Param *p4){
+        if(p1->type==VECT2_DT)
+            this->a = (Vect2d*)p1->value;
+        if(p2->type==VECT2_DT)
+            this->b = (Vect2d*)p2->value;
+        if(p2->type==VECT2_DT)
+            this->c = (Vect2d*)p3->value;
+        if(p2->type==VECT2_DT)
+            this->d = (Vect2d*)p4->value;
+    }
+    Vect2d* a;
+    Vect2d* b;
+    Vect2d* c;
+    Vect2d* d;
+
+};
+
+
+class Elipse{
+public:
+    Elipse(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT2_DT)
+            this->center = (Vect2d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->width = (float*)p2->value;
+        if(p2->type==VECT2_DT)
+            this->height = (float*)p3->value;
+    }
+    Vect2d* center;
+    float* width;
+    float* height;
+
+};
+
+class Circ{
+public:
+    Circ(Param *p1,Param *p2){
+        if(p1->type==VECT2_DT)
+            this->center = (Vect2d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->radius = (float*)p2->value;
+    }
+    Vect2d* center;
+    float* radius;
+
+};
+
+class Parabole{
+public:
+    Parabole(Param *p1,Param *p2){
+        if(p1->type==VECT2_DT)
+            this->yCutPoint = (Vect2d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->factor = (float*)p2->value;
+    }
+    Vect2d* yCutPoint;
+    float* factor;
+
+};
+
+
+class Hyperbole{
+public:
+    Hyperbole(Param *p1,Param *p2){
+        if(p1->type==VECT2_DT)
+            this->yCutPoint = (Vect2d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->factor = (float*)p2->value;
+    }
+    Vect2d* yCutPoint;
+    float* factor;
+
+};
+
+
+class Cilindre{
+public:
+    Cilindre(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT3_DT)
+            this->center = (Vect3d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->height = (float*)p2->value;
+        if(p3->type==FLOAT_DT)
+            this->radius = (float*)p3->value;
+    }
+    Vect3d* center;
+    float* height;
+    float* radius;
+
+};
+
+class Cone{
+public:
+    Cone(Param *p1,Param *p2,Param *p3){
+        if(p1->type==VECT3_DT)
+            this->center = (Vect3d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->height = (float*)p2->value;
+        if(p3->type==FLOAT_DT)
+            this->radius = (float*)p3->value;
+    }
+    Vect3d* center;
+    float* height;
+    float* radius;
+
+};
+
+class Sphere{
+public:
+    Sphere(Param *p1,Param *p2){
+        if(p1->type==VECT3_DT)
+            this->center = (Vect3d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->radius = (float*)p2->value;
+    }
+    Vect3d* center;
+    float* radius;
+
+};
+
+
+class Polyhedron{
+public:
+    Polyhedron(Param *p1,Param *p2){
+        if(p1->type==FLOAT_DT)
+            this->n = (float*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->m = (float*)p2->value;
+    }
+    float* n;
+    float* m;
+
+};
 
 class Sentence{
 public:
@@ -224,6 +444,13 @@ class PointDeclaration : public Declaration{
 public:
     PointDeclaration(QString*id,Param* p){this->id=id;this->p=p;}
     Param* p;
+    void GenerateCode(){
+        if(p->type==VECT2_DT){
+            Vect2d vect = *(Vect2d*)p->value;
+            qDebug()<<"Declarando un punto con id:"<<*this->id<<"punto:"<<vect.x<<","<<vect.y;
+        }
+
+    }
 };
 
 class RectDeclaration : public Declaration{
@@ -231,6 +458,7 @@ public:
     RectDeclaration(QString*id,Param *a,Param *b){this->id=id;this->a=a;this->b=b;}
     Param *a;
     Param *b;
+
 };
 
 

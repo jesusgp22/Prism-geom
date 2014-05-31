@@ -6,6 +6,8 @@ Vector2d b (1,-1);
 Vector3d c (-1,1,0);
 Vector2d d (-1,-1);
 
+Punto p {1.333};
+
 Cuadrilatero Cuad {a,b,c,d};
 
 Dibujar Cuad Color (1,0,0,0.5);

@@ -18,7 +18,7 @@ ID       [a-zA-Z_][a-zA-Z0-9_]*
 
 
 ("+"|"-")?{DIGIT}+("."{DIGIT}*)?   {    tokens+="<PTO_FLOT>, \""; tokens+=yytext; tokens+="\"\n";
-                                                                        yylval.fval = atof(yytext);
+                                                                        yylval.fval = new float(atof(yytext));
 									return PTO_FLOT;}
 
 Inicio			{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
