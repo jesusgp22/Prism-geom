@@ -1821,7 +1821,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 161 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.param)= new Param(FLOAT_DT,(void*)(yyvsp[(1) - (1)].fval));}
+    {(yyval.param)= new Param(FLOAT_DT,(void*)new Float(*(yyvsp[(1) - (1)].fval)));}
     break;
 
   case 34:

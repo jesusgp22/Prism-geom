@@ -99,7 +99,7 @@ void MainWindow::on_pushButton_clicked()
 
                 // append
                 ui->consola->setFontWeight( QFont::DemiBold );
-                ui->consola->setTextColor( QColor( "red" ) );
+                ui->consola->setTextColor( QColor( "yellow" ) );
                 this->ui->consola->append("Advertencia: Variable \"" + i.value()->name + "\" declarada pero nunca se usa");
 
                 // restore old color
@@ -113,7 +113,7 @@ void MainWindow::on_pushButton_clicked()
 
 
         for(int i=0;i<root->sentence_list->size();i++){
-            root->sentence_list->at(i)->GenerateCode();
+            //root->sentence_list->at(i)->GenerateCode();
         }
     }else{
 

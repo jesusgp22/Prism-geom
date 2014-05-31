@@ -158,7 +158,7 @@ Expresion : Param {$$ = new ParamExpresion($1);}
 ;
 
 Param : Color {$$= new Param(COLOR_DT,(void*)$1);}
-        |PTO_FLOT {$$= new Param(FLOAT_DT,(void*)$1);}
+        |PTO_FLOT {$$= new Param(FLOAT_DT,(void*)new Float(*$1));}
         |Vect2d {$$= new Param(VECT2_DT,(void*)$1);}
         |Vect3d {$$= new Param(VECT3_DT,(void*)$1);}
         |ID { if(check(*$1)) {$$ = new Param($1);} else{ $$ = new Param(); } }

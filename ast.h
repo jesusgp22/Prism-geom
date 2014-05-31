@@ -106,7 +106,7 @@ public:
 
 class Float: public DataType{
 public:
-    Float(float f){this->f=f;}
+    Float(float f){this->f=f; qDebug()<<"Creado un nuevo FLOTANTE con valor:"<<QString::number(f);}
     float f;
     QString getValueString(){
         return QString::number(f);
@@ -279,9 +279,7 @@ public:
     Vect3d* b;
     Vect3d* c;
     QString getValueString(){
-        qDebug()<<"imprimiendo un plano";
         return "punto a: "+a->getValueString()+" punto b: "+b->getValueString()+" punto c: "+c->getValueString();
-        qDebug()<<"termino";
     }
 };
 
@@ -298,6 +296,10 @@ public:
     Vect2d* a;
     Vect2d* b;
     Vect2d* c;
+
+    QString getValueString(){
+        return "vert a: "+a->getValueString()+" vert b: "+b->getValueString()+" vert c: "+c->getValueString();
+    }
 
 };
 
@@ -318,6 +320,10 @@ public:
     Vect2d* c;
     Vect2d* d;
 
+    QString getValueString(){
+        return "vert a: "+a->getValueString()+" vert b: "+b->getValueString()+" vert c: "+c->getValueString()+" vert d: "+d->getValueString();
+    }
+
 };
 
 
@@ -327,13 +333,17 @@ public:
         if(p1->type==VECT2_DT)
             this->center = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->width = (float*)p2->value;
-        if(p2->type==VECT2_DT)
-            this->height = (float*)p3->value;
+            this->width = ((Float*)p2->value)->f;
+        if(p2->type==FLOAT_DT)
+            this->height = ((Float*)p3->value)->f;
     }
     Vect2d* center;
-    float* width;
-    float* height;
+    float width;
+    float height;
+
+    QString getValueString(){
+        return "centro: "+center->getValueString()+" ancho: "+QString::number(width)+" altura: "+QString::number(height);
+    }
 
 };
 
@@ -343,10 +353,14 @@ public:
         if(p1->type==VECT2_DT)
             this->center = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->radius = (float*)p2->value;
+            this->radius = ((Float*)p2->value)->f;
     }
     Vect2d* center;
-    float* radius;
+    float radius;
+
+    QString getValueString(){
+        return "centro: "+center->getValueString()+" radio: "+QString::number(radius);
+    }
 
 };
 
@@ -356,10 +370,14 @@ public:
         if(p1->type==VECT2_DT)
             this->yCutPoint = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->factor = (float*)p2->value;
+            this->factor = ((Float*)p2->value)->f;
     }
     Vect2d* yCutPoint;
-    float* factor;
+    float factor;
+
+    QString getValueString(){
+        return "punto minimo: "+yCutPoint->getValueString()+" factor multiplicativo: "+QString::number(factor);
+    }
 
 };
 
@@ -370,11 +388,14 @@ public:
         if(p1->type==VECT2_DT)
             this->yCutPoint = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->factor = (float*)p2->value;
+            this->factor = ((Float*)p2->value)->f;
     }
     Vect2d* yCutPoint;
-    float* factor;
+    float factor;
 
+    QString getValueString(){
+        return "punto minimo: "+yCutPoint->getValueString()+" factor multiplicativo: "+QString::number(factor);
+    }
 };
 
 
@@ -384,13 +405,17 @@ public:
         if(p1->type==VECT3_DT)
             this->center = (Vect3d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->height = (float*)p2->value;
+            this->height = ((Float*)p2->value)->f;
         if(p3->type==FLOAT_DT)
-            this->radius = (float*)p3->value;
+            this->radius = ((Float*)p3->value)->f;
     }
     Vect3d* center;
-    float* height;
-    float* radius;
+    float height;
+    float radius;
+
+    QString getValueString(){
+        return "centro de la base: "+center->getValueString()+" altura: "+QString::number(height)+" radio: "+QString::number(radius);
+    }
 
 };
 
@@ -400,13 +425,17 @@ public:
         if(p1->type==VECT3_DT)
             this->center = (Vect3d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->height = (float*)p2->value;
+            this->height = ((Float*)p2->value)->f;
         if(p3->type==FLOAT_DT)
-            this->radius = (float*)p3->value;
+            this->radius = ((Float*)p3->value)->f;
     }
     Vect3d* center;
-    float* height;
-    float* radius;
+    float height;
+    float radius;
+
+    QString getValueString(){
+        return "centro de la base: "+center->getValueString()+" altura: "+QString::number(height)+" radio: "+QString::number(radius);
+    }
 
 };
 
@@ -416,10 +445,14 @@ public:
         if(p1->type==VECT3_DT)
             this->center = (Vect3d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->radius = (float*)p2->value;
+            this->radius = ((Float*)p2->value)->f;
     }
     Vect3d* center;
-    float* radius;
+    float radius;
+
+    QString getValueString(){
+        return "centro de la base: "+center->getValueString()+" radio: "+QString::number(radius);
+    }
 
 };
 
@@ -428,12 +461,16 @@ class Polyhedron: public DataType{
 public:
     Polyhedron(Param *p1,Param *p2){
         if(p1->type==FLOAT_DT)
-            this->n = (float*)p1->value;
+            this->n = ((Float*)p1->value)->f;
         if(p2->type==FLOAT_DT)
-            this->m = (float*)p2->value;
+            this->m = ((Float*)p2->value)->f;
     }
-    float* n;
-    float* m;
+    float n;
+    float m;
+
+    QString getValueString(){
+        return "num caras: "+QString::number(n)+" num lados: "+QString::number(m);
+    }
 
 };
 
