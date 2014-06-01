@@ -113,11 +113,12 @@ void MainWindow::on_pushButton_clicked()
 
         viewer = new Viewer();
         viewport = viewer->getViewport();
-        viewer->show();
 
         for(int i=0;i<root->sentence_list->size();i++){
-            root->sentence_list->at(i)->GenerateCode();
+            root->sentence_list->at(i)->GenerateCode(viewport);
         }
+
+        viewer->show();
     }else{
 
         QString m = "Analisis finalizo con ";

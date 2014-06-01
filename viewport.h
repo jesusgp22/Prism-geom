@@ -2,7 +2,7 @@
 #define VIEWPORT_H
 
 #include <QGLWidget>
-#include "ast.h"
+class Color;
 
 class Viewport : public QGLWidget
 {
@@ -17,9 +17,11 @@ public:
     void initializeGL();
     void paintGL();
     void resizeGL(int w, int h);
+    void setBackgroundColor(Color* c);
 
     bool drawAxes;
     Color* backgroundColor;
+
 
 signals:
 

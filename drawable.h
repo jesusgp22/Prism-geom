@@ -91,6 +91,18 @@ public:
         //pop the model matrix
         glPopMatrix();
     }
+
+    void AddTransform(Transform t){
+        trans.append(t);
+    }
+    void AddDraw(Color* color){
+        draw = true;
+        drawColor = color;
+    }
+    void AddFill(Color* color){
+        fill = true;
+        fillColor = color;
+    }
     virtual void DrawShape();
     virtual void FillShape();
 }

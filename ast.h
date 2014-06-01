@@ -5,6 +5,7 @@
 #include<QString>
 #include<QHash>
 #include<QDebug>
+#include"viewport.h"
 
 //SYMBOL TABLE
 class Identifier;
@@ -476,7 +477,7 @@ public:
 
 class Sentence{
 public:
-    virtual void GenerateCode(){  }
+    virtual void GenerateCode(Viewport* v){  }
 };
 
 class Root {
@@ -588,7 +589,7 @@ public:
     Draw(QString*id,Param* c){this->id=id;this->color=c;}
     QString*id;
     Param* color;
-    void GenerateCode(){
+    void GenerateCode(Viewport *v){
         Color *c = (Color*)color->value;
         qDebug()<<"dibujando el id"<<*id<<"con color: "<<c->getValueString();
         Identifier *i = symbols.value(*id);
@@ -599,6 +600,7 @@ class Background : public Function{
 public:
     Background(Param* c){this->color=c;}
     Param* color;
+    void GenerateCode(Viewport *v);
 };
 
 class Fill : public Function{

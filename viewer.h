@@ -2,7 +2,7 @@
 #define VIEWER_H
 
 #include <QWidget>
-class Viewport;
+#include <viewport.h>
 
 namespace Ui {
 class Viewer;

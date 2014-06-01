@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <GL/glut.h>
 #include <GL/glu.h>
+#include "ast.h"
 
 #define AXE_DRAW_DISTANCE 1000
 
@@ -80,4 +81,8 @@ void Viewport::paintGL(){
 
 void Viewport::resizeGL(int w, int h){
     qDebug()<<w<<" , "<<h;
+}
+
+void Viewport::setBackgroundColor(Color *c){
+    this->backgroundColor = c;
 }

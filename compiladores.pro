@@ -18,7 +18,8 @@ SOURCES +=\
     prism.tab.cpp \
     lex.yy.cpp \
     viewport.cpp \
-    viewer.cpp
+    viewer.cpp \
+    ast.cpp
 
 HEADERS  += mainwindow.h \
     prism.tab.h \
