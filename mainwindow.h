@@ -5,7 +5,8 @@
 #include <QtCore>
 #include <QtGui>
 #include <QFileDialog>
-
+#include "viewer.h"
+#include "viewport.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Viewer* viewer;
+    Viewport *viewport;
 
 private slots:
     void on_pushButton_clicked();
@@ -40,6 +43,7 @@ private slots:
     void on_actionGuardar_Como_triggered();
 
     void on_textEdit_cursorPositionChanged();
+
 
 private:
     Ui::MainWindow *ui;

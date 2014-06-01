@@ -20,7 +20,6 @@ public:
     virtual QString getValueString(){
         return "Undefined";
     }
-    virtual void Draw(){}
 };
 
 //INDENTIFIER CLASS
@@ -229,9 +228,6 @@ public:
     Vect2d* point;
     QString getValueString(){
         return "posicion: "+point->getValueString();
-    }
-    void Draw(){
-        qDebug()<<"dibujando un punto";
     }
 };
 
@@ -596,7 +592,6 @@ public:
         Color *c = (Color*)color->value;
         qDebug()<<"dibujando el id"<<*id<<"con color: "<<c->getValueString();
         Identifier *i = symbols.value(*id);
-        i->value->Draw();
     }
 };
 

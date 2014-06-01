@@ -111,6 +111,9 @@ void MainWindow::on_pushButton_clicked()
             ++row;
         }
 
+        viewer = new Viewer();
+        viewport = viewer->getViewport();
+        viewer->show();
 
         for(int i=0;i<root->sentence_list->size();i++){
             root->sentence_list->at(i)->GenerateCode();

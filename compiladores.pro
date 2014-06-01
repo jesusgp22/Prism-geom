@@ -17,15 +17,19 @@ SOURCES +=\
     main.cpp \
     prism.tab.cpp \
     lex.yy.cpp \
-    viewport.cpp
+    viewport.cpp \
+    viewer.cpp
 
 HEADERS  += mainwindow.h \
     prism.tab.h \
     ast.h \
     ast_declaration.h \
-    viewport.h
+    viewport.h \
+    viewer.h \
+    drawable.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    viewer.ui
 
 RESOURCES += \
     recursos.qrc
