@@ -82,7 +82,6 @@ void Viewport::paintGL(){
     glMatrixMode(GL_MODELVIEW_MATRIX);
     QHash<QString, Renderer*>::iterator i;
     for (i = renderers.begin(); i != renderers.end(); ++i){
-        qDebug() <<"dibujando id:"<< i.key();
         i.value()->Draw();
     }
 }

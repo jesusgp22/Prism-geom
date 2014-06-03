@@ -218,6 +218,7 @@ public:
     QVector<QVector2D*> verts;
 
     void Init(){
+        initialized = true;
         float x;
         float y;
         float stepSize;
@@ -234,7 +235,7 @@ public:
         if(!initialized){
             Init();
         }
-        glBegin(GL_LINE_STRIP);
+        glBegin(GL_LINE_LOOP);
             for(int i=0;i<verts.size();i++){
                 glVertex2f(verts[i]->x(),verts[i]->y());
             }
@@ -264,6 +265,7 @@ public:
     QVector<QVector2D*> verts;
 
     void Init(){
+        initialized = true;
         float x;
         float y;
         float stepSize;
@@ -273,6 +275,64 @@ public:
             x = circle->radius*cos(t)+circle->center->x;
             y = circle->radius*sin(t)+circle->center->y;
             verts.append(new QVector2D(x,y));
+        }
+    }
+
+    void DrawShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_LINE_LOOP);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
+    }
+
+    void FillShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_TRIANGLE_FAN);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
+    }
+};
+
+class ParaboleRenderer: public Renderer{
+public:
+    ParaboleRenderer(Parabole* c){this->parabole=c; initialized=false;}
+    Parabole* parabole;
+    bool initialized;
+    QVector<QVector2D*> verts;
+
+    void Init(){
+        initialized = true;
+        float x;
+        float y;
+        float stepSize;
+
+        GLint m_viewport[4];
+        //this call should be avoided and replaced by variables
+        glGetIntegerv( GL_VIEWPORT, m_viewport );
+
+        float startPoint = (float)m_viewport[2]/(float)m_viewport[3];
+
+        stepSize = startPoint*2/NUM_STEPS; //integration range between num steps
+
+        for(int i=0;i<=NUM_STEPS;i++){
+            float t = (-startPoint)+stepSize*i; //start integration from -1
+            x = t+parabole->yCutPoint->x;
+            y = t*t*parabole->factor+parabole->yCutPoint->y;
+            verts.append(new QVector2D(x,y));
+        }
+
+        for(int i=0;i<verts.size();i++){
+            qDebug()<<verts[i]->x()<<","<<verts[i]->y()<<"i:"<<i;
         }
     }
 
@@ -300,5 +360,4 @@ public:
 
     }
 };
-
 #endif // RENDERER_H

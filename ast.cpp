@@ -48,6 +48,13 @@ void Declaration::GenerateCode(Viewport *v){
             v->addRenderer(*id,r);
             break;
         }
+        case PARABOLE_DT:
+        {
+            Parabole* p = (Parabole*)i->value;
+            Renderer* r = new ParaboleRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";
             break;
