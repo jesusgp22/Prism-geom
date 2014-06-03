@@ -3,7 +3,13 @@
 
 #include<QDebug>
 #include<QGLWidget>
+#include<QVector>
+#include<QVector2D>
 #include "ast.h"
+#include <cmath>
+
+#define PI 3.141592
+#define NUM_STEPS 50
 
 class ITransform{
 public:
@@ -202,6 +208,99 @@ public:
             glVertex2f(triangle->b->x,triangle->b->y);
             glVertex2f(triangle->c->x,triangle->c->y);
         glEnd();
+    }
+};
+
+class ElipseRenderer: public Renderer{
+public:
+    ElipseRenderer(Elipse *p){this->elipse = p;initialized=false;}
+    Elipse* elipse;
+    bool initialized;
+    QVector<QVector2D*> verts;
+
+    void Init(){
+        float x;
+        float y;
+        float stepSize;
+        stepSize = 2*PI/NUM_STEPS;
+        for(int i=0;i<NUM_STEPS;i++){
+            float t = stepSize*i;
+            x = elipse->width*cos(t)+elipse->center->x;
+            y = elipse->height*sin(t)+elipse->center->y;
+            verts.append(new QVector2D(x,y));
+        }
+    }
+
+    void DrawShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_LINE_STRIP);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+                qDebug()<<"x:"<<verts[i]->x()<<"y:"<<verts[i]->y();
+            }
+        glEnd();
+
+    }
+
+    void FillShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_TRIANGLE_FAN);
+            //glVertex2f(elipse->center->x,elipse->center->y);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+                qDebug()<<"x:"<<verts[i]->x()<<"y:"<<verts[i]->y();
+            }
+        glEnd();
+
+    }
+};
+
+class CircRenderer: public Renderer{
+public:
+    CircRenderer(Circ* c){this->circle=c; initialized=false;}
+    Circ* circle;
+    bool initialized;
+    QVector<QVector2D*> verts;
+
+    void Init(){
+        float x;
+        float y;
+        float stepSize;
+        stepSize = 2*PI/NUM_STEPS;
+        for(int i=0;i<NUM_STEPS;i++){
+            float t = stepSize*i;
+            x = circle->radius*cos(t)+circle->center->x;
+            y = circle->radius*sin(t)+circle->center->y;
+            verts.append(new QVector2D(x,y));
+        }
+    }
+
+    void DrawShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_LINE_STRIP);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
+    }
+
+    void FillShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_TRIANGLE_FAN);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
     }
 };
 

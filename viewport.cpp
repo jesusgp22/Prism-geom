@@ -27,13 +27,25 @@ Viewport::~Viewport(){
 
 void Viewport::initializeGL(){
 
+    //clear color
     glClearColor(backgroundColor->red,backgroundColor->green,backgroundColor->blue,1);
+
+    //allow drawing polygons no matter where they face
     glDisable(GL_CULL_FACE);
+
+    //allow color alpha blending
     glEnable( GL_BLEND );
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    //set up point and line size
     glPointSize(3);
     glLineWidth(2);
 
+    //antialising settings
+    glEnable( GL_LINE_SMOOTH );
+    glEnable( GL_POLYGON_SMOOTH );
+    glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
+    glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
 
 }
 

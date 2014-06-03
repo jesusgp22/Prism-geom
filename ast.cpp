@@ -34,6 +34,20 @@ void Declaration::GenerateCode(Viewport *v){
             v->addRenderer(*id,r);
             break;
         }
+        case ELIPSE_DT:
+        {
+            Elipse* p = (Elipse*)i->value;
+            Renderer* r = new ElipseRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
+        case CIRC_DT:
+        {
+            Circ* p = (Circ*)i->value;
+            Renderer* r = new CircRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";
             break;
