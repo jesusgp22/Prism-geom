@@ -1,7 +1,6 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include<QDebug>
 #include<QGLWidget>
 #include<QVector>
 #include<QVector2D>
@@ -238,7 +237,6 @@ public:
         glBegin(GL_LINE_STRIP);
             for(int i=0;i<verts.size();i++){
                 glVertex2f(verts[i]->x(),verts[i]->y());
-                qDebug()<<"x:"<<verts[i]->x()<<"y:"<<verts[i]->y();
             }
         glEnd();
 
@@ -252,7 +250,6 @@ public:
             //glVertex2f(elipse->center->x,elipse->center->y);
             for(int i=0;i<verts.size();i++){
                 glVertex2f(verts[i]->x(),verts[i]->y());
-                qDebug()<<"x:"<<verts[i]->x()<<"y:"<<verts[i]->y();
             }
         glEnd();
 

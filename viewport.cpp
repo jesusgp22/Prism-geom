@@ -47,11 +47,21 @@ void Viewport::initializeGL(){
     glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
     glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
 
+    //if 2d scene
+    glViewport(0, 0, this->width(), this->height());
+    glMatrixMode(GL_PROJECTION);
+    float aspect = (float)this->width() / (float)this->height();
+    glOrtho(-aspect, aspect, -1, 1, -1, 1);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
 }
 
 void Viewport::paintGL(){
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     //DRAW AXES
@@ -78,7 +88,13 @@ void Viewport::paintGL(){
 }
 
 void Viewport::resizeGL(int w, int h){
-    qDebug()<<w<<" , "<<h;
+    //if 2d scene
+//    glViewport(0, 0, w, h);
+//    glMatrixMode(GL_PROJECTION);
+//    float aspect = w / h;
+//    glOrtho(-aspect, aspect, -1, 1, -1, 1);
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
 }
 
 void Viewport::setBackgroundColor(Color *c){
