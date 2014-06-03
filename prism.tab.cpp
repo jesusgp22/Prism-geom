@@ -1622,7 +1622,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 98 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new FloatDeclaration((yyvsp[(2) - (3)].string),*(yyvsp[(3) - (3)].fval));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (3)].string));
                                     check_or_insert(*(yyvsp[(2) - (3)].string),FLOAT_DT,new Float(*(yyvsp[(3) - (3)].fval)));}
     break;
 
@@ -1630,7 +1630,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 100 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Vect2dDeclaration((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].vect2d));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (3)].string));
                                     check_or_insert(*(yyvsp[(2) - (3)].string),VECT2_DT,(yyvsp[(3) - (3)].vect2d));}
     break;
 
@@ -1638,7 +1638,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 102 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Vect3dDeclaration((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].vect3d));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (3)].string));
                                     check_or_insert(*(yyvsp[(2) - (3)].string),VECT3_DT,(yyvsp[(3) - (3)].vect3d));}
     break;
 
@@ -1646,7 +1646,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 104 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new ColorDeclaration((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].color));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (3)].string));
                                     check_or_insert(*(yyvsp[(2) - (3)].string),COLOR_DT,(yyvsp[(3) - (3)].color));}
     break;
 
@@ -1654,7 +1654,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 107 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new PointDeclaration((yyvsp[(2) - (5)].string),(yyvsp[(4) - (5)].param));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (5)].string));
                                     check_or_insert(*(yyvsp[(2) - (5)].string),POINT_DT,new Point((yyvsp[(4) - (5)].param)));
                                     if((yyvsp[(4) - (5)].param)->type!=VECT2_DT){yyerror("ERROR: La posicion del punto debe ser Vector2d\nPrototipo: Punto {Vector2d posicion}");}
                                     }
@@ -1664,7 +1664,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 112 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new RectDeclaration((yyvsp[(2) - (7)].string),(yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param));
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),RECT_DT,new Rect((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Recta {Vector2d a,Vector2d b}");}
                                     if((yyvsp[(6) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Recta {Vector2d a,Vector2d b}");}
@@ -1675,7 +1675,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 118 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CURVE_DT,new Curve((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
                                     if((yyvsp[(6) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
@@ -1687,7 +1687,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 126 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),PLANE_DT,new Plane((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El punto \"a\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
                                     if((yyvsp[(6) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El punto \"b\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
@@ -1699,7 +1699,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 133 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),TRIANGLE_DT,new Triangle((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
                                     if((yyvsp[(6) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"b\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
@@ -1711,7 +1711,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 140 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (11)].string));
                                     check_or_insert(*(yyvsp[(2) - (11)].string),QUAD_DT,new Quad((yyvsp[(4) - (11)].param),(yyvsp[(6) - (11)].param),(yyvsp[(8) - (11)].param),(yyvsp[(10) - (11)].param)));
                                     if((yyvsp[(4) - (11)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
                                     if((yyvsp[(6) - (11)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"b\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
@@ -1724,7 +1724,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 148 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),ELIPSE_DT,new Elipse((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
                                     if((yyvsp[(6) - (9)].param)->type!=FLOAT_DT){yyerror("ERROR: El ancho debe ser Flotante\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
@@ -1736,7 +1736,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 155 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),CIRC_DT,new Circ((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Circunferencia {Vector2d centro,Flotante radio}");}
                                     if((yyvsp[(6) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Circunferencia {Vector2d centro,Flotante radio}");}
@@ -1747,7 +1747,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 161 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),PARABOLE_DT,new Parabole((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
                                     if((yyvsp[(6) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
@@ -1758,7 +1758,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 167 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),HYPERBOLE_DT,new Parabole((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
                                     if((yyvsp[(6) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
@@ -1769,7 +1769,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 173 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),POLYHEDRON_DT,new Polyhedron((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El numero de caras debe ser Flotante\nPrototipo: Poliedro {Flotante num_caras,Flotante num_lados}");}
                                     if((yyvsp[(6) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El numero de lados debe ser Flotante\nPrototipo: Poliedro {Flotante num_caras,Flotante num_lados}");}
@@ -1780,7 +1780,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 179 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CILINDRE_DT,new Cilindre((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if((yyvsp[(6) - (9)].param)->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
@@ -1792,7 +1792,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 186 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CONE_DT,new Cone((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if((yyvsp[(6) - (9)].param)->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
@@ -1804,7 +1804,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 193 "/home/jesus/Workspace/Prism-geom/prism.y"
-    {(yyval.declaration) = new Declaration;
+    {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),SPHERE_DT,new Sphere((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Esfera {Vector3d centro,Flotante radio}");}
                                     if((yyvsp[(6) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Esfera {Vector3d centro,Flotante radio}");}

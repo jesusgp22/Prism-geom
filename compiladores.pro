@@ -27,7 +27,7 @@ HEADERS  += mainwindow.h \
     ast_declaration.h \
     viewport.h \
     viewer.h \
-    drawable.h
+    renderer.h
 
 FORMS    += mainwindow.ui \
     viewer.ui

@@ -1,11 +1,13 @@
 #include "viewer.h"
 #include "ui_viewer.h"
+class Root;
 
 Viewer::Viewer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Viewer)
 {
     ui->setupUi(this);
+
 }
 
 Viewer::~Viewer()

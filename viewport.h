@@ -2,8 +2,13 @@
 #define VIEWPORT_H
 
 #include <QGLWidget>
-class Color;
+#include <QString>
+#include <QHash>
 
+class ITransform;
+class Color;
+class Renderer;
+class Root;
 class Viewport : public QGLWidget
 {
     Q_OBJECT
@@ -17,11 +22,16 @@ public:
     void initializeGL();
     void paintGL();
     void resizeGL(int w, int h);
+
+    void addRenderer(QString id, Renderer* renderer);
     void setBackgroundColor(Color* c);
+    void addDraw(QString id,Color* c);
+    void addFill(QString id,Color* c);
+    void addTransform(QString id,ITransform* t);
 
     bool drawAxes;
     Color* backgroundColor;
-
+    QHash<QString,Renderer*> renderers;
 
 signals:
 

@@ -141,7 +141,7 @@ class Color : public DataType{
 public:
     Color(float r,float g,float b,float a){this->red=r;this->green=g;this->blue=b;this->alpha=a;}
     Color(QString* c){
-        this->alpha=0;
+        this->alpha=1;
         QString name=*c;
         if(name=="NEGRO"){
             this->red=0;
@@ -150,33 +150,33 @@ public:
         }else if(name=="AZUL"){
             this->red=0;
             this->green=0;
-            this->blue=255;
+            this->blue=1;
         }else if(name=="CIAN"){
             this->red=0;
-            this->green=176;
-            this->blue=246;
-        }else if(name=="GIS"){
-            this->red=152;
-            this->green=152;
-            this->blue=152;
+            this->green=0.69;
+            this->blue=0.964;
+        }else if(name=="GRIS"){
+            this->red=0.59;
+            this->green=0.59;
+            this->blue=0.59;
         }else if(name=="VERDE"){
             this->red=0;
-            this->green=255;
+            this->green=1;
             this->blue=0;
         }else if(name=="MAGENTA"){
-            this->red=245;
+            this->red=0.9607;
             this->green=0;
-            this->blue=135;
+            this->blue=0.5294;
         }else if(name=="NARANJA"){
-            this->red=230;
-            this->green=95;
+            this->red=0.9019;
+            this->green=0.3725;
             this->blue=0;
         }else if(name=="ROSADO"){
-            this->red=247;
-            this->green=191;
-            this->blue=190;
+            this->red=0.9686;
+            this->green=0.746;
+            this->blue=0.7450;
         }else if(name=="ROJO"){
-            this->red=255;
+            this->red=1;
             this->green=0;
             this->blue=0;
         }else if(name=="BLANCO"){
@@ -184,8 +184,8 @@ public:
             this->green=1;
             this->blue=1;
         }else if(name=="AMARILLO"){
-            this->red=255;
-            this->green=233;
+            this->red=1;
+            this->green=0.913;
             this->blue=0;
         }
     }
@@ -490,45 +490,9 @@ public:
 
 class Declaration : public Sentence{
 public:
+    Declaration(QString* id){this->id=id;}
     QString* id;
-};
-
-class FloatDeclaration : public Declaration{
-public:
-    FloatDeclaration(QString* id,float fval){this->f=fval;this->id=id;}
-    float f;
-};
-
-class Vect2dDeclaration : public Declaration{
-public:
-    Vect2dDeclaration(QString*id,Vect2d *v2d){this->id=id;this->v2d=v2d;}
-    Vect2d *v2d;
-};
-
-class Vect3dDeclaration : public Declaration{
-public:
-    Vect3dDeclaration(QString*id,Vect3d *v3d){this->id=id;this->v3d=v3d;}
-    Vect3d *v3d;
-};
-
-class ColorDeclaration : public Declaration{
-public:
-    ColorDeclaration(QString*id,Color *c){this->id=id;this->color=c;}
-    Color *color;
-};
-
-class PointDeclaration : public Declaration{
-public:
-    PointDeclaration(QString*id,Param* p){this->id=id;this->p=p;}
-    Param* p;
-};
-
-class RectDeclaration : public Declaration{
-public:
-    RectDeclaration(QString*id,Param *a,Param *b){this->id=id;this->a=a;this->b=b;}
-    Param *a;
-    Param *b;
-
+    void GenerateCode(Viewport *v);
 };
 
 
@@ -589,11 +553,7 @@ public:
     Draw(QString*id,Param* c){this->id=id;this->color=c;}
     QString*id;
     Param* color;
-    void GenerateCode(Viewport *v){
-        Color *c = (Color*)color->value;
-        qDebug()<<"dibujando el id"<<*id<<"con color: "<<c->getValueString();
-        Identifier *i = symbols.value(*id);
-    }
+    void GenerateCode(Viewport *v);
 };
 
 class Background : public Function{
@@ -608,6 +568,7 @@ public:
     Fill(QString*id,Param* c){this->id=id;this->color=c;}
     QString*id;
     Param* color;
+    void GenerateCode(Viewport *v);
 };
 
 class Translate : public Function{

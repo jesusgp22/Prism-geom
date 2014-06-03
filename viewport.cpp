@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include "ast.h"
+#include "renderer.h"
 
 #define AXE_DRAW_DISTANCE 1000
 
@@ -27,10 +28,11 @@ Viewport::~Viewport(){
 void Viewport::initializeGL(){
 
     glClearColor(backgroundColor->red,backgroundColor->green,backgroundColor->blue,1);
-    //glEnable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
     glEnable( GL_BLEND );
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+    glPointSize(3);
+    glLineWidth(2);
 
 
 }
@@ -55,28 +57,12 @@ void Viewport::paintGL(){
         glEnd();
     }
 
-
-    glColor4f(1,0,0,1);
-    glBegin(GL_TRIANGLES);
-        glVertex3d(0,0,0);
-        glVertex3d(0,0.5,0);
-        glVertex3d(0.5,0,0);
-    glEnd();
-
     glMatrixMode(GL_MODELVIEW_MATRIX);
-    glPushMatrix();
-    glRotatef(45,0,0,1);
-    glTranslatef(0.1,0.1,0);
-    glScalef(0.5,0.5,0.5);
-        glPointSize(3);
-        glColor4f(0,1,0,0.5);
-        glBegin(GL_TRIANGLES);
-            glVertex3d(0,0,0);
-            glVertex3d(0,0.5,0);
-            glVertex3d(0.5,0,0);
-        glEnd();
-    glPopMatrix();
-
+    QHash<QString, Renderer*>::iterator i;
+    for (i = renderers.begin(); i != renderers.end(); ++i){
+        qDebug() <<"dibujando id:"<< i.key();
+        i.value()->Draw();
+    }
 }
 
 void Viewport::resizeGL(int w, int h){
@@ -85,4 +71,22 @@ void Viewport::resizeGL(int w, int h){
 
 void Viewport::setBackgroundColor(Color *c){
     this->backgroundColor = c;
+}
+
+void Viewport::addRenderer(QString id,Renderer* renderer){
+    if(renderers.contains(id)){
+        qDebug()<<"Error id ya existe";
+        return;
+    }
+    renderers.insert(id,renderer);
+}
+
+void Viewport::addDraw(QString id,Color* c){
+    renderers.value(id)->AddDraw(c);
+}
+void Viewport::addFill(QString id,Color* c){
+    renderers.value(id)->AddFill(c);
+}
+void Viewport::addTransform(QString id,ITransform* t){
+    renderers.value(id)->AddTransform(t);
 }

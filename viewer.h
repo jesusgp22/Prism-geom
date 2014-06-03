@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <viewport.h>
-
+class Root;
 namespace Ui {
 class Viewer;
 }
