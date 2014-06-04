@@ -33,6 +33,9 @@ void Viewport::initializeGL(){
     //allow drawing polygons no matter where they face
     glDisable(GL_CULL_FACE);
 
+    //allow depth testing ?
+    //glEnable( GL_DEPTH_TEST);
+
     //allow color alpha blending
     glEnable( GL_BLEND );
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -109,11 +112,20 @@ void Viewport::addRenderer(QString id,Renderer* renderer){
 }
 
 void Viewport::addDraw(QString id,Color* c){
-    renderers.value(id)->AddDraw(c);
+    if(renderers.contains(id))
+        renderers.value(id)->AddDraw(c);
+    else
+        qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }
 void Viewport::addFill(QString id,Color* c){
-    renderers.value(id)->AddFill(c);
+    if(renderers.contains(id))
+        renderers.value(id)->AddFill(c);
+    else
+        qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }
 void Viewport::addTransform(QString id,ITransform* t){
-    renderers.value(id)->AddTransform(t);
+    if(renderers.contains(id))
+        renderers.value(id)->AddTransform(t);
+    else
+        qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }

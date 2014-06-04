@@ -55,6 +55,13 @@ void Declaration::GenerateCode(Viewport *v){
             v->addRenderer(*id,r);
             break;
         }
+        case HYPERBOLE_DT:
+        {
+            Hyperbole* p = (Hyperbole*)i->value;
+            Renderer* r = new HyperboleRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";
             break;

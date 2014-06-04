@@ -369,15 +369,15 @@ class Parabole: public DataType{
 public:
     Parabole(Param *p1,Param *p2){
         if(p1->type==VECT2_DT)
-            this->yCutPoint = (Vect2d*)p1->value;
+            this->minPoint = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
             this->factor = ((Float*)p2->value)->f;
     }
-    Vect2d* yCutPoint;
+    Vect2d* minPoint;
     float factor;
 
     QString getValueString(){
-        return "punto minimo: "+yCutPoint->getValueString()+" factor multiplicativo: "+QString::number(factor);
+        return "punto minimo: "+minPoint->getValueString()+" factor multiplicativo: "+QString::number(factor);
     }
 
 };
@@ -385,17 +385,20 @@ public:
 
 class Hyperbole: public DataType{
 public:
-    Hyperbole(Param *p1,Param *p2){
+    Hyperbole(Param *p1,Param *p2,Param *p3){
         if(p1->type==VECT2_DT)
-            this->yCutPoint = (Vect2d*)p1->value;
+            this->focus = (Vect2d*)p1->value;
         if(p2->type==FLOAT_DT)
-            this->factor = ((Float*)p2->value)->f;
+            this->a = ((Float*)p2->value)->f;
+        if(p2->type==FLOAT_DT)
+            this->b = ((Float*)p3->value)->f;
     }
-    Vect2d* yCutPoint;
-    float factor;
+    Vect2d* focus;
+    float a;
+    float b;
 
     QString getValueString(){
-        return "punto minimo: "+yCutPoint->getValueString()+" factor multiplicativo: "+QString::number(factor);
+        return "foco: "+focus->getValueString()+" parametro a: "+QString::number(a)+" parametro b: "+QString::number(b);
     }
 };
 

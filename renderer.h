@@ -326,8 +326,8 @@ public:
 
         for(int i=0;i<=NUM_STEPS;i++){
             float t = (-startPoint)+stepSize*i; //start integration from -1
-            x = t+parabole->yCutPoint->x;
-            y = t*t*parabole->factor+parabole->yCutPoint->y;
+            x = t+parabole->minPoint->x;
+            y = t*t*parabole->factor+parabole->minPoint->y;
             verts.append(new QVector2D(x,y));
         }
 
@@ -355,6 +355,69 @@ public:
         glBegin(GL_TRIANGLE_FAN);
             for(int i=0;i<verts.size();i++){
                 glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
+    }
+};
+
+class HyperboleRenderer: public Renderer{
+public:
+    HyperboleRenderer(Hyperbole* c){this->hyperbole=c; initialized=false;}
+    Hyperbole* hyperbole;
+    bool initialized;
+    QVector<QVector2D*> vertsUpper;
+    QVector<QVector2D*> vertsLower;
+
+    void Init(){
+        //this function works with a little math magic and a lot of unstable stuff, threat with extreme caution
+        initialized = true;
+        float x;
+        float y;
+        float stepSize;
+
+        //t ranges between pi and -pi
+        stepSize = 2*PI/NUM_STEPS;
+
+        for(int i=0;i<=NUM_STEPS;i++){
+            float t = -PI + stepSize*i;
+            x = hyperbole->a*cosh(t);
+            y = hyperbole->b*sinh(t);
+            vertsUpper.append(new QVector2D(x,y));
+            x = -x;
+            vertsLower.append(new QVector2D(x,y));
+        }
+    }
+
+    void DrawShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_LINE_STRIP);
+            for(int i=0;i<vertsUpper.size();i++){
+                glVertex2f(vertsUpper[i]->x(),vertsUpper[i]->y());
+            }
+        glEnd();
+        glBegin(GL_LINE_STRIP);
+            for(int i=0;i<vertsLower.size();i++){
+                glVertex2f(vertsLower[i]->x(),vertsLower[i]->y());
+            }
+        glEnd();
+
+    }
+
+    void FillShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_TRIANGLE_FAN);
+            for(int i=0;i<vertsUpper.size();i++){
+                glVertex2f(vertsUpper[i]->x(),vertsUpper[i]->y());
+            }
+        glEnd();
+        glBegin(GL_TRIANGLE_FAN);
+            for(int i=0;i<vertsLower.size();i++){
+                glVertex2f(vertsLower[i]->x(),vertsLower[i]->y());
             }
         glEnd();
 

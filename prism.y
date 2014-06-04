@@ -164,10 +164,11 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new Declaration($2);
                                     if($6->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
                                     }
 
-                |HIPERBOLA ID '{' Param ',' Param '}' {$$ = new Declaration($2);
-                                    check_or_insert(*$2,HYPERBOLE_DT,new Parabole($4,$6));
-                                    if($4->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
-                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Hiperbola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
+                |HIPERBOLA ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration($2);
+                                    check_or_insert(*$2,HYPERBOLE_DT,new Hyperbole($4,$6,$8));
+                                    if($4->type!=VECT2_DT){yyerror("ERROR: El foco debe ser Vector2d\nPrototipo: Hiperbola {Vector2d foco,Flotante factor_multiplicativo,Flotante distancia_focal}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El factor multiplicativo debe ser Flotante\nPrototipo: Hiperbola {Vector2d foco,Flotante factor_multiplicativo,Flotante distancia_focal}");}
+                                    if($8->type!=FLOAT_DT){yyerror("ERROR: La distancia focal ser Flotante\nPrototipo: Hiperbola {Vector2d foco,Flotante factor_multiplicativo,Flotante distancia_focal}");}
                                     }
 
                 |POLIEDRO ID '{' Param ',' Param '}' {$$ = new Declaration($2);
