@@ -4,8 +4,11 @@
 #include<QGLWidget>
 #include<QVector>
 #include<QVector2D>
+#include<vector>
 #include "ast.h"
 #include <cmath>
+#include "spline.h"
+#include <GL/glut.h>
 
 #define PI 3.141592
 #define NUM_STEPS 50
@@ -423,4 +426,131 @@ public:
 
     }
 };
+
+class CurveRenderer: public Renderer{
+public:
+    CurveRenderer(Curve* c){this->curve=c; initialized=false;}
+    Curve* curve;
+    bool initialized;
+    QVector<QVector2D*> verts;
+
+    void Init(){
+        //this function might be easily changed for more than three point splines!
+        initialized = true;
+
+        //spline calculation
+        vector<double> xs;
+        xs.push_back(curve->a->x);
+        xs.push_back(curve->b->x);
+        xs.push_back(curve->c->x);
+        vector<double> ys;
+        ys.push_back(curve->a->y);
+        ys.push_back(curve->b->y);
+        ys.push_back(curve->c->y);
+
+        vector<SplineSet> cs = CalculateSpline(xs,ys);
+
+        //vertex calculation
+        float x,y,t;
+        float numSteps = 5;
+        float stepSize;
+
+        for(int i=0;i<cs.size();i++){
+            qDebug()<<cs[i].d<<cs[i].c<<cs[i].b<<cs[i].a<<cs[i].x;
+            stepSize = 0.4/numSteps;
+            for(int j=0;j<numSteps;j++){
+                t = j*stepSize;
+                x = j*stepSize+i*0.4;
+                y = cs[i].d*(t*t*t) + cs[i].c*t*t + cs[i].b*t + cs[i].a;
+                qDebug()<<t<<","<<y;
+                verts.append(new QVector2D(x,y));
+            }
+        }
+    }
+
+    void DrawShape(){
+        if(!initialized){
+            Init();
+        }
+        glBegin(GL_LINE_STRIP);
+            for(int i=0;i<verts.size();i++){
+                glVertex2f(verts[i]->x(),verts[i]->y());
+            }
+        glEnd();
+
+    }
+
+    void FillShape(){
+        DrawShape();
+    }
+};
+
+class ConeRenderer: public Renderer{
+public:
+    ConeRenderer(Cone* c){this->cone=c;}
+    Cone* cone;
+
+    void DrawShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(cone->center->x,cone->center->y,cone->center->z);
+            glutWireCone(cone->radius,cone->height,NUM_STEPS,1);
+        glPopMatrix();
+    }
+
+    void FillShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(cone->center->x,cone->center->y,cone->center->z);
+            glutSolidCone(cone->radius,cone->height,NUM_STEPS,1);
+        glPopMatrix();
+    }
+};
+
+class SphereRenderer: public Renderer{
+public:
+    SphereRenderer(Sphere* c){this->sphere=c;}
+    Sphere* sphere;
+
+    void DrawShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(sphere->center->x,sphere->center->y,sphere->center->z);
+            glutWireSphere(sphere->radius,NUM_STEPS,NUM_STEPS);
+        glPopMatrix();
+    }
+
+    void FillShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(sphere->center->x,sphere->center->y,sphere->center->z);
+            glutSolidSphere(sphere->radius,NUM_STEPS/2,NUM_STEPS/2);
+        glPopMatrix();
+    }
+};
+
+class CylinderRenderer: public Renderer{
+public:
+    CylinderRenderer(Cylindre* c){this->cylindre=c;}
+    Cylindre* cylindre;
+
+    void DrawShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(cylindre->center->x,cylindre->center->y,cylindre->center->z);
+            GLUquadric* q = gluNewQuadric();
+            gluCylinder(q,cylindre->radius,cylindre->radius,cylindre->height,NUM_STEPS/2,1);
+        glPopMatrix();
+    }
+
+    void FillShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glPushMatrix();
+            glTranslatef(cylindre->center->x,cylindre->center->y,cylindre->center->z);
+            GLUquadric* q = gluNewQuadric();
+            gluCylinder(q,cylindre->radius,cylindre->radius,cylindre->height,NUM_STEPS/2,1);
+        glPopMatrix();
+    }
+};
+
 #endif // RENDERER_H

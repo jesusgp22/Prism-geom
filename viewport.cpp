@@ -50,14 +50,35 @@ void Viewport::initializeGL(){
     glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
     glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
 
-    //if 2d scene
+
     glViewport(0, 0, this->width(), this->height());
     glMatrixMode(GL_PROJECTION);
+    glLoadIdentity(); //carefull
     float aspect = (float)this->width() / (float)this->height();
-    glOrtho(-aspect, aspect, -1, 1, -1, 1);
+
+    //if 2d scene
+    //glOrtho(-aspect, aspect, -1, 1, -1, 1);
+    //if 3d scene
+    //allow for color material
+    glEnable(GL_COLOR_MATERIAL);
+    //reduce line width for 3d
+    glLineWidth(1);
+
+    //glFrustum(-aspect,aspect,-1,1,0.1,10);
+    gluLookAt(0,1,0,0,0,0,0,0,1);
+    GLfloat lightpos[] = {.5, 1., 1., 0.};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    //gluPerspective(45,aspect,0.1,50);
+
+    //enable lightning
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
 
 }
 

@@ -14,7 +14,7 @@ extern QHash<QString, Identifier*> symbols;
 //DATA TYPES
 enum DATATYPE{FLOAT_DT,VECT2_DT,VECT3_DT,COLOR_DT,POINT_DT,RECT_DT,CURVE_DT,PLANE_DT,TRIANGLE_DT,QUAD_DT,ELIPSE_DT,CIRC_DT,
               PARABOLE_DT,HYPERBOLE_DT,
-              POLYHEDRON_DT,CILINDRE_DT,CONE_DT,SPHERE_DT,NONE_DT};
+              POLYHEDRON_DT,CYLINDRE_DT,CONE_DT,SPHERE_DT,NONE_DT};
 
 class DataType{
 public:
@@ -36,7 +36,7 @@ public:
                 ||t==ELIPSE_DT||t==CIRC_DT||t==PARABOLE_DT||t==HYPERBOLE_DT)
         {
             this->dimension=GEOM2D;
-        }else if(t==VECT3_DT||t==POLYHEDRON_DT||t==CILINDRE_DT||t==CONE_DT||t==SPHERE_DT)
+        }else if(t==VECT3_DT||t==POLYHEDRON_DT||t==CYLINDRE_DT||t==CONE_DT||t==SPHERE_DT)
         {
             this->dimension=GEOM3D;
         }
@@ -403,9 +403,9 @@ public:
 };
 
 
-class Cilindre: public DataType{
+class Cylindre: public DataType{
 public:
-    Cilindre(Param *p1,Param *p2,Param *p3){
+    Cylindre(Param *p1,Param *p2,Param *p3){
         if(p1->type==VECT3_DT)
             this->center = (Vect3d*)p1->value;
         if(p2->type==FLOAT_DT)

@@ -62,6 +62,34 @@ void Declaration::GenerateCode(Viewport *v){
             v->addRenderer(*id,r);
             break;
         }
+        case CURVE_DT:
+        {
+            Curve* p = (Curve*)i->value;
+            Renderer* r = new CurveRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
+        case CONE_DT:
+        {
+            Cone* p = (Cone*)i->value;
+            Renderer* r = new ConeRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
+        case SPHERE_DT:
+        {
+            Sphere* p = (Sphere*)i->value;
+            Renderer* r = new SphereRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
+        case CYLINDRE_DT:
+        {
+            Cylindre* p = (Cylindre*)i->value;
+            Renderer* r = new CylinderRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";
             break;

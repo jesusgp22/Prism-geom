@@ -178,7 +178,7 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new Declaration($2);
                                     }
 
                 |CILINDRO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration($2);
-                                    check_or_insert(*$2,CILINDRE_DT,new Cilindre($4,$6,$8));
+                                    check_or_insert(*$2,CYLINDRE_DT,new Cylindre($4,$6,$8));
                                     if($4->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if($6->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if($8->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}

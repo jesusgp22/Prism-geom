@@ -1786,7 +1786,7 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 180 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
-                                    check_or_insert(*(yyvsp[(2) - (9)].string),CILINDRE_DT,new Cilindre((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
+                                    check_or_insert(*(yyvsp[(2) - (9)].string),CYLINDRE_DT,new Cylindre((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if((yyvsp[(6) - (9)].param)->type!=FLOAT_DT){yyerror("ERROR: La altura debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
                                     if((yyvsp[(8) - (9)].param)->type!=FLOAT_DT){yyerror("ERROR: El radio debe ser Flotante\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
