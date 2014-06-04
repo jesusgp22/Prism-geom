@@ -50,7 +50,6 @@ void Viewport::initializeGL(){
     glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
     glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
 
-
     glViewport(0, 0, this->width(), this->height());
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); //carefull
@@ -58,23 +57,26 @@ void Viewport::initializeGL(){
 
     //if 2d scene
     //glOrtho(-aspect, aspect, -1, 1, -1, 1);
+
+
     //if 3d scene
     //allow for color material
     glEnable(GL_COLOR_MATERIAL);
     //reduce line width for 3d
-    glLineWidth(1);
+    glLineWidth(2);
 
+    //set up prespective
     //glFrustum(-aspect,aspect,-1,1,0.1,10);
-    gluLookAt(0,1,0,0,0,0,0,0,1);
-    GLfloat lightpos[] = {.5, 1., 1., 0.};
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-    //gluPerspective(45,aspect,0.1,50);
+    gluPerspective(90,aspect,1,3);
 
     //enable lightning
     glEnable(GL_LIGHTING);
+    //set up the light
+    GLfloat lightpos[] = {.5, 1., 1., 0.};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     glEnable(GL_LIGHT0);
 
-
+    drawAxes = true;
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -88,16 +90,18 @@ void Viewport::paintGL(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    gluLookAt(0,0,2,0,0,0,0,1,0);
     //DRAW AXES
     if(drawAxes){
-        glColor3f(1,1,1);
+
         glBegin(GL_LINES);
+            glColor3f(1,0.5,0.5);
             glVertex3f(-AXE_DRAW_DISTANCE,0,0);
             glVertex3f(AXE_DRAW_DISTANCE,0,0);
-
+            glColor3f(0.5,1,0.5);
             glVertex3f(0,AXE_DRAW_DISTANCE,0);
             glVertex3f(0,-AXE_DRAW_DISTANCE,0);
-
+            glColor3f(0.5,0.5,1);
             glVertex3f(0,0,AXE_DRAW_DISTANCE);
             glVertex3f(0,0,-AXE_DRAW_DISTANCE);
         glEnd();
