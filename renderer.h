@@ -9,6 +9,7 @@
 #include <cmath>
 #include "spline.h"
 #include <GL/glut.h>
+#include <GL/glu.h>
 
 #define PI 3.141592
 #define NUM_STEPS 50
@@ -539,6 +540,7 @@ public:
         glPushMatrix();
             glTranslatef(cylindre->center->x,cylindre->center->y,cylindre->center->z);
             GLUquadric* q = gluNewQuadric();
+            gluQuadricDrawStyle(q,GLU_LINE);
             gluCylinder(q,cylindre->radius,cylindre->radius,cylindre->height,NUM_STEPS/2,1);
         glPopMatrix();
     }
@@ -548,6 +550,7 @@ public:
         glPushMatrix();
             glTranslatef(cylindre->center->x,cylindre->center->y,cylindre->center->z);
             GLUquadric* q = gluNewQuadric();
+            gluQuadricDrawStyle(q,GLU_FILL);
             gluCylinder(q,cylindre->radius,cylindre->radius,cylindre->height,NUM_STEPS/2,1);
         glPopMatrix();
     }
