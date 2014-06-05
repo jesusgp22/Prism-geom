@@ -123,11 +123,10 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new Declaration($2);
                                     }
 
 
-                |PLANO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration($2);
-                                    check_or_insert(*$2,PLANE_DT,new Plane($4,$6,$8));
-                                    if($4->type!=VECT3_DT){yyerror("ERROR: El punto \"a\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
-                                    if($6->type!=VECT3_DT){yyerror("ERROR: El punto \"b\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
-                                    if($8->type!=VECT3_DT){yyerror("ERROR: El punto \"c\" debe ser Vector3d\nPrototipo: Plano {Vector2d a,Vector3d b,Vector2d c}");}
+                |PLANO ID '{' Param ',' Param '}' {$$ = new Declaration($2);
+                                    check_or_insert(*$2,PLANE_DT,new Plane($4,$6));
+                                    if($4->type!=VECT3_DT){yyerror("ERROR: El centro debe ser Vector3d\nPrototipo: Plano {Vector2d centro,Flotante lado}");}
+                                    if($6->type!=FLOAT_DT){yyerror("ERROR: El lado debe ser flotante\nPrototipo: Plano {Vector2d centro,Flotante lado}");}
                                     }
 
                 |TRIANGULO ID '{' Param ',' Param ',' Param '}' {$$ = new Declaration($2);

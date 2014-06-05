@@ -268,19 +268,16 @@ public:
 
 class Plane: public DataType{
 public:
-    Plane(Param *p1,Param *p2,Param *p3){
+    Plane(Param *p1,Param *p2){
         if(p1->type==VECT3_DT)
-            this->a = (Vect3d*)p1->value;
-        if(p2->type==VECT3_DT)
-            this->b = (Vect3d*)p2->value;
-        if(p3->type==VECT3_DT)
-            this->c = (Vect3d*)p3->value;
+            this->center = (Vect3d*)p1->value;
+        if(p2->type==FLOAT_DT)
+            this->side = ((Float*)p2->value)->f;
     }
-    Vect3d* a;
-    Vect3d* b;
-    Vect3d* c;
+    Vect3d* center;
+    float side;
     QString getValueString(){
-        return "punto a: "+a->getValueString()+" punto b: "+b->getValueString()+" punto c: "+c->getValueString();
+        return "centro: "+center->getValueString()+" lado: "+ QString::number(side);
     }
 };
 

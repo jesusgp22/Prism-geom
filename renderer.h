@@ -556,4 +556,31 @@ public:
     }
 };
 
+class PlaneRenderer: public Renderer{
+public:
+    PlaneRenderer(Plane* c){this->plane=c;this->plane->side=this->plane->side/2;}
+    Plane* plane;
+
+    void DrawShape(){
+
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glBegin(GL_LINE_LOOP);
+            glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z+plane->side);
+            glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z+plane->side);
+            glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z-plane->side);
+            glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z-plane->side);
+        glEnd();
+    }
+
+    void FillShape(){
+        glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+        glBegin(GL_TRIANGLE_FAN);
+            glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z+plane->side);
+            glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z+plane->side);
+            glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z-plane->side);
+            glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z-plane->side);
+        glEnd();
+    }
+};
+
 #endif // RENDERER_H

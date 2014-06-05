@@ -90,6 +90,13 @@ void Declaration::GenerateCode(Viewport *v){
             v->addRenderer(*id,r);
             break;
         }
+        case PLANE_DT:
+        {
+            Plane* p = (Plane*)i->value;
+            Renderer* r = new PlaneRenderer(p);
+            v->addRenderer(*id,r);
+            break;
+        }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";
             break;

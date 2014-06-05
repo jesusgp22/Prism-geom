@@ -66,7 +66,6 @@ void Viewport::initializeGL(){
     glLineWidth(2);
 
     //set up prespective
-    //glFrustum(-aspect,aspect,-1,1,0.1,10);
     gluPerspective(90,aspect,1,3);
 
     //enable lightning
@@ -90,7 +89,8 @@ void Viewport::paintGL(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    gluLookAt(0,0,2,0,0,0,0,1,0);
+    //if 3d
+    gluLookAt(0,2,0,0,0,0,0,0,1);
     //DRAW AXES
     if(drawAxes){
 
@@ -115,13 +115,14 @@ void Viewport::paintGL(){
 }
 
 void Viewport::resizeGL(int w, int h){
-    //if 2d scene
-//    glViewport(0, 0, w, h);
-//    glMatrixMode(GL_PROJECTION);
-//    float aspect = w / h;
-//    glOrtho(-aspect, aspect, -1, 1, -1, 1);
-//    glMatrixMode(GL_MODELVIEW);
-//    glLoadIdentity();
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity(); //carefull
+    float aspect = (float)w / (float)h;
+    //if 2d
+    //glOrtho(-aspect, aspect, -1, 1, -1, 1)
+    //if 3d
+    gluPerspective(90,aspect,1,3);
 }
 
 void Viewport::setBackgroundColor(Color *c){
