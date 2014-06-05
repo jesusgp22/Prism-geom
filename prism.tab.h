@@ -39,34 +39,37 @@
    enum yytokentype {
      INICIO = 258,
      FIN = 259,
-     DIBUJAR = 260,
-     RELLENAR = 261,
-     ROTAR = 262,
-     TRASLADAR = 263,
-     ESCALAR = 264,
-     SOBRE = 265,
-     FONDO = 266,
-     PTO_FLOT = 267,
-     COLOR = 268,
-     VECT2D = 269,
-     VECT3D = 270,
-     FLOTANTE = 271,
-     PUNTO = 272,
-     RECTA = 273,
-     CURVA = 274,
-     PLANO = 275,
-     TRIANGULO = 276,
-     CUADRILATERO = 277,
-     ELIPSE = 278,
-     CIRCUNFERENCIA = 279,
-     PARABOLA = 280,
-     HIPERBOLA = 281,
-     POLIEDRO = 282,
-     CILINDRO = 283,
-     CONO = 284,
-     ESFERA = 285,
-     COLOR_PREDEF = 286,
-     ID = 287
+     ESCENA = 260,
+     _2D = 261,
+     _3D = 262,
+     DIBUJAR = 263,
+     RELLENAR = 264,
+     ROTAR = 265,
+     TRASLADAR = 266,
+     ESCALAR = 267,
+     SOBRE = 268,
+     FONDO = 269,
+     PTO_FLOT = 270,
+     COLOR = 271,
+     VECT2D = 272,
+     VECT3D = 273,
+     FLOTANTE = 274,
+     PUNTO = 275,
+     RECTA = 276,
+     CURVA = 277,
+     PLANO = 278,
+     TRIANGULO = 279,
+     CUADRILATERO = 280,
+     ELIPSE = 281,
+     CIRCUNFERENCIA = 282,
+     PARABOLA = 283,
+     HIPERBOLA = 284,
+     POLIEDRO = 285,
+     CILINDRO = 286,
+     CONO = 287,
+     ESFERA = 288,
+     COLOR_PREDEF = 289,
+     ID = 290
    };
 #endif
 
@@ -102,7 +105,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 106 "/home/jesus/Workspace/Prism-geom/prism.tab.h"
+#line 109 "/home/jesus/Workspace/Prism-geom/prism.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

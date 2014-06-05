@@ -334,10 +334,6 @@ public:
             y = t*t*parabole->factor+parabole->minPoint->y;
             verts.append(new QVector2D(x,y));
         }
-
-        for(int i=0;i<verts.size();i++){
-            qDebug()<<verts[i]->x()<<","<<verts[i]->y()<<"i:"<<i;
-        }
     }
 
     void DrawShape(){

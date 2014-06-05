@@ -30,6 +30,7 @@ public:
     void addTransform(QString id,ITransform* t);
 
     bool drawAxes;
+    bool is2d;
     Color* backgroundColor;
     QHash<QString,Renderer*> renderers;
 

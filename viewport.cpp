@@ -50,50 +50,46 @@ void Viewport::initializeGL(){
     glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
     glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
 
+    //set up viewport
     glViewport(0, 0, this->width(), this->height());
+
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity(); //carefull
+    glLoadIdentity();
     float aspect = (float)this->width() / (float)this->height();
 
-    //if 2d scene
-    //glOrtho(-aspect, aspect, -1, 1, -1, 1);
+    if(is2d){
+        //set a 2d ortho proyection
+        glOrtho(-aspect, aspect, -1, 1, -1, 1);
+    }else{
+        //allow for color material
+        glEnable(GL_COLOR_MATERIAL);
+        //reduce line width for 3d
+        glLineWidth(2);
 
+        //set up prespective
+        gluPerspective(90,aspect,1,3);
 
-    //if 3d scene
-    //allow for color material
-    glEnable(GL_COLOR_MATERIAL);
-    //reduce line width for 3d
-    glLineWidth(2);
-
-    //set up prespective
-    gluPerspective(90,aspect,1,3);
-
-    //enable lightning
-    glEnable(GL_LIGHTING);
-    //set up the light
-    GLfloat lightpos[] = {.5, 1., 1., 0.};
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-    glEnable(GL_LIGHT0);
-
-    drawAxes = true;
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
+        //enable lightning
+        glEnable(GL_LIGHTING);
+        //set up the light
+        GLfloat lightpos[] = {.5, 1., 1., 0.};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+        glEnable(GL_LIGHT0);
+    }
 
 }
 
 void Viewport::paintGL(){
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
 
-    //if 3d
-    gluLookAt(0,2,0,0,0,0,0,0,1);
+    if(!is2d){
+        //set the camera position
+        gluLookAt(0,2,0,0,0,0,0,0,1);
+    }
+
     //DRAW AXES
     if(drawAxes){
-
         glBegin(GL_LINES);
             glColor3f(1,0.5,0.5);
             glVertex3f(-AXE_DRAW_DISTANCE,0,0);
@@ -107,7 +103,8 @@ void Viewport::paintGL(){
         glEnd();
     }
 
-    glMatrixMode(GL_MODELVIEW_MATRIX);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     QHash<QString, Renderer*>::iterator i;
     for (i = renderers.begin(); i != renderers.end(); ++i){
         i.value()->Draw();
@@ -119,10 +116,11 @@ void Viewport::resizeGL(int w, int h){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity(); //carefull
     float aspect = (float)w / (float)h;
-    //if 2d
-    //glOrtho(-aspect, aspect, -1, 1, -1, 1)
-    //if 3d
-    gluPerspective(90,aspect,1,3);
+    if(is2d){
+        glOrtho(-aspect, aspect, -1, 1, -1, 1);
+    }else{
+        gluPerspective(90,aspect,1,3);
+    }
 }
 
 void Viewport::setBackgroundColor(Color *c){

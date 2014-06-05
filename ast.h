@@ -482,8 +482,10 @@ public:
 
 class Root {
 public:
-    Root(std::vector<Sentence*>* list){this->sentence_list=list;}
+    Root(std::vector<Sentence*>* list,bool is2d){this->sentence_list=list; this->is2d = is2d;}
+    Root(std::vector<Sentence*>* list){this->sentence_list=list; this->is2d = true;}
     std::vector<Sentence*> *sentence_list;
+    bool is2d;
 };
 
 //DECLARATION CLASSES:

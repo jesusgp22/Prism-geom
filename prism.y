@@ -51,7 +51,7 @@
         Expresion* expresion;
 }
 
-%token INICIO FIN 
+%token INICIO FIN ESCENA _2D _3D
 %token DIBUJAR RELLENAR ROTAR TRASLADAR ESCALAR SOBRE FONDO
 %token <fval>PTO_FLOT
 %token COLOR VECT2D VECT3D FLOTANTE
@@ -84,8 +84,13 @@
 Programa : INICIO Lista_Sentencias FIN  {root = new Root($2);
                                         if(errors==0)
                                             syntax+="\nSintaxis Correcta\n";}
+          |INICIO ESCENA _2D Lista_Sentencias FIN  {root = new Root($4,true);
+                                        if(errors==0)
+                                            syntax+="\nSintaxis Correcta\n";}
+          |INICIO ESCENA _3D Lista_Sentencias FIN  {root = new Root($4,false);
+                                        if(errors==0)
+                                            syntax+="\nSintaxis Correcta\n";}
 ; 
-
 Lista_Sentencias : Sentencia    {$$ = new std::vector<Sentence*>(); $$->push_back($1);}
       | Lista_Sentencias Sentencia  {$$->push_back($2);} //push lista de parametros
 ; 

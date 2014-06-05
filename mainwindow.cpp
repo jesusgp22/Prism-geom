@@ -113,6 +113,11 @@ void MainWindow::on_pushButton_clicked()
 
         viewer = new Viewer();
         viewport = viewer->getViewport();
+        if(root->is2d){
+            viewport->is2d = true;
+        }else{
+            viewport->is2d = false;
+        }
 
         for(int i=0;i<root->sentence_list->size();i++){
             root->sentence_list->at(i)->GenerateCode(viewport);

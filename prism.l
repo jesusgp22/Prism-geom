@@ -28,6 +28,15 @@ Inicio			{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 Fin			{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 									return FIN;}
 
+Escena                  {tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
+                                                                        return ESCENA;}
+
+2D|2d                  {tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
+                                                                        return _2D;}
+
+3D|3d                  {tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
+                                                                        return _3D;}
+
 Dibujar		{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 									return DIBUJAR;}
 
