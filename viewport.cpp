@@ -33,9 +33,6 @@ void Viewport::initializeGL(){
     //allow drawing polygons no matter where they face
     glDisable(GL_CULL_FACE);
 
-    //allow depth testing ?
-    //glEnable( GL_DEPTH_TEST);
-
     //allow color alpha blending
     glEnable( GL_BLEND );
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -65,6 +62,9 @@ void Viewport::initializeGL(){
         glEnable(GL_COLOR_MATERIAL);
         //reduce line width for 3d
         glLineWidth(2);
+
+        //allow depth testing
+        glEnable( GL_DEPTH_TEST);
 
         //set up prespective
         gluPerspective(90,aspect,1,3);
