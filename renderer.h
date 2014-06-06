@@ -16,7 +16,7 @@
 
 class ITransform{
 public:
-    virtual void Transform();
+    virtual void Transform(){}
 };
 
 class IRotate: public ITransform{
@@ -59,6 +59,7 @@ public:
         this->z = z;
     }
     void Transform(){
+        qDebug()<<"aplicando transformacion "<<x<<y<<z;
         glTranslatef(x,y,z);
     }
     float x;
@@ -561,6 +562,7 @@ public:
 
         glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
         glBegin(GL_LINE_LOOP);
+            glNormal3f(0,1,0);
             glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z+plane->side);
             glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z+plane->side);
             glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z-plane->side);
@@ -571,6 +573,7 @@ public:
     void FillShape(){
         glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
         glBegin(GL_TRIANGLE_FAN);
+            glNormal3f(0,1,0);
             glVertex3f(plane->center->x-plane->side,plane->center->y,plane->center->z+plane->side);
             glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z+plane->side);
             glVertex3f(plane->center->x+plane->side,plane->center->y,plane->center->z-plane->side);

@@ -121,3 +121,20 @@ void Background::GenerateCode(Viewport *v){
         c = new Color(0,0,0,1);
     v->setBackgroundColor(c);
 }
+
+void Translate::GenerateCode(Viewport *v){
+
+    Identifier* myId = symbols.value(*id);
+    if(myId->dimension==Identifier::GEOM2D){
+        Vect2d* myVect = (Vect2d*)this->vect->value;
+        qDebug()<<myVect->x<<myVect->y;
+        v->addTransform(*id,new ITranslate(myVect->x,myVect->y,0));
+    }else{
+        Vect3d* myVect = (Vect3d*)vect;
+        v->addTransform(*id,new ITranslate(myVect->x,myVect->y,myVect->z));
+
+    }
+}
+
+void Rotate::GenerateCode(Viewport *v){}
+void Scale::GenerateCode(Viewport *v){}

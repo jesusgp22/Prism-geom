@@ -59,6 +59,7 @@ void MainWindow::on_actionAbrir_triggered()
 
 void MainWindow::on_pushButton_clicked()
 {
+    std::cout<<"asdfghl";
     symbols.clear();
     this->ui->tableWidget->setRowCount(0);
     ui->consola->append("Comenzando analisis...");

@@ -1,19 +1,15 @@
 Inicio
 
-Flotante a 3;
-Vector3d vert1 (0,0,1);
-Vector2d vert2 (1,0);
-Vector3d vert3 (0,1,3);
-Color verdeClaro(0.1,0.9,0.1,0);
-Vector2d a (1,1);
-vert3 = (0,1,3);
-Fondo NEGRñ;
+Vector2d vert1 (0,0);
+Vector2d vert2 (0.3,0);
+Vector2d vert3 (0,0.3);
+Color verdeClaro(0.1,0.9,0.1,0.9);
+
+Fondo NARANJA;
 
 
 Triangulo T1 {vert1,vert2,vert3};
-Esfera E1 {vert3,5};
-
 Dibujar T1 Color verdeClaro;
-Dibujar E1 Color ROJO;
+Trasladar T1 (0.3,0.3);
 
 Fin

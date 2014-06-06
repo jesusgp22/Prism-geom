@@ -1,9 +1,9 @@
-Inicio
-Fondo NEGRO
+Inicio Escena 3D
+Fondo NEGRO;
 
-Vect3d centro (0,0,0)
-Esfera miEsfera {centro,4}
+Vector3d centro (0,0,0);
+Esfera miEsfera {centro,2};
 
-Dibujar miEsfera Color GRIS
+Dibujar miEsfera Color GRIS;
 
 Fin

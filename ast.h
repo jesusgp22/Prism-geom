@@ -578,6 +578,7 @@ public:
     Translate(QString*id,Param* v){this->id=id;this->vect=v;}
     QString*id;
     Param* vect;
+    void GenerateCode(Viewport *v);
 };
 
 class Rotate : public Function{
@@ -586,6 +587,7 @@ public:
     QString*id;
     Param* axis;
     Param* angle;
+    void GenerateCode(Viewport *v);
 };
 
 class Scale : public Function{
@@ -593,6 +595,7 @@ public:
     Scale(QString*id,Param* v){this->id=id;this->vect=v;}
     QString*id;
     Param* vect;
+    void GenerateCode(Viewport *v);
 };
 
 #endif // AST_H

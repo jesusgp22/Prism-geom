@@ -140,6 +140,7 @@ void Viewport::addDraw(QString id,Color* c){
         renderers.value(id)->AddDraw(c);
     else
         qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
+    renderers.value(id)->AddTransform(new IScale(0.3,0.3,0));
 }
 void Viewport::addFill(QString id,Color* c){
     if(renderers.contains(id))
@@ -148,8 +149,9 @@ void Viewport::addFill(QString id,Color* c){
         qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }
 void Viewport::addTransform(QString id,ITransform* t){
-    if(renderers.contains(id))
+    if(renderers.contains(id)){
         renderers.value(id)->AddTransform(t);
-    else
+        qDebug()<<"agregada una transformacion al id"<<id;
+    }else
         qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }
