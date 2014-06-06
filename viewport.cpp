@@ -85,7 +85,7 @@ void Viewport::paintGL(){
 
     if(!is2d){
         //set the camera position
-        gluLookAt(0,2,0,0,0,0,0,0,1);
+        gluLookAt(0,-2,0,0,0,0,0,0,1);
     }
 
     //DRAW AXES
@@ -151,7 +151,6 @@ void Viewport::addFill(QString id,Color* c){
 void Viewport::addTransform(QString id,ITransform* t){
     if(renderers.contains(id)){
         renderers.value(id)->AddTransform(t);
-        qDebug()<<"agregada una transformacion al id"<<id;
     }else
         qDebug()<<"Error: el id especificado no esta en la tabla de simbolos";
 }

@@ -59,7 +59,6 @@ void MainWindow::on_actionAbrir_triggered()
 
 void MainWindow::on_pushButton_clicked()
 {
-    std::cout<<"asdfghl";
     symbols.clear();
     this->ui->tableWidget->setRowCount(0);
     ui->consola->append("Comenzando analisis...");
@@ -107,7 +106,6 @@ void MainWindow::on_pushButton_clicked()
                 ui->consola->setFontWeight( fw );
                 ui->consola->setTextColor( tc );
             }
-            //cout << i.key() << ": " << i.value()-> << endl;
             ++i;
             ++row;
         }

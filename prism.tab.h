@@ -80,7 +80,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 32 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 31 "/home/jesus/Workspace/Prism-geom/prism.y"
 
         float* fval;
         QString* string;

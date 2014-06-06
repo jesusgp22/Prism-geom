@@ -1,6 +1,5 @@
 %{
     #include <stdio.h>
-    #include <QDebug>
     #include <QString>
     #include <QHash>
     #include "ast.h"
@@ -296,7 +295,6 @@ if(check(*$2))
 Trasladar : TRASLADAR ID Param { $$ = new Translate($2,$3);
     if(check(*$2))
     {
-        qDebug()<<"se alcanzo esta regla";
         Identifier* id = symbols.value(*$2);
         if(id->type == VECT2_DT||id->type == VECT3_DT || id->type == FLOAT_DT)
             yyerror("ERROR: Solo se pueden trasladar figuras GEOM2D o GEOM3D");

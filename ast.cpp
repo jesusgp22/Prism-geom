@@ -127,14 +127,24 @@ void Translate::GenerateCode(Viewport *v){
     Identifier* myId = symbols.value(*id);
     if(myId->dimension==Identifier::GEOM2D){
         Vect2d* myVect = (Vect2d*)this->vect->value;
-        qDebug()<<myVect->x<<myVect->y;
         v->addTransform(*id,new ITranslate(myVect->x,myVect->y,0));
     }else{
-        Vect3d* myVect = (Vect3d*)vect;
+        Vect3d* myVect = (Vect3d*)vect->value;
         v->addTransform(*id,new ITranslate(myVect->x,myVect->y,myVect->z));
 
     }
 }
 
 void Rotate::GenerateCode(Viewport *v){}
-void Scale::GenerateCode(Viewport *v){}
+void Scale::GenerateCode(Viewport *v){
+
+    Identifier* myId = symbols.value(*id);
+    if(myId->dimension==Identifier::GEOM2D){
+        Vect2d* myVect = (Vect2d*)this->vect->value;
+        v->addTransform(*id,new IScale(myVect->x,myVect->y,0));
+    }else{
+        Vect3d* myVect = (Vect3d*)vect->value;
+        v->addTransform(*id,new IScale(myVect->x,myVect->y,myVect->z));
+
+    }
+}

@@ -59,7 +59,6 @@ public:
         this->z = z;
     }
     void Transform(){
-        qDebug()<<"aplicando transformacion "<<x<<y<<z;
         glTranslatef(x,y,z);
     }
     float x;
@@ -87,7 +86,6 @@ public:
             //apply transformations for each matrix
             QList<ITransform*>::iterator i;
             for (i = trans.begin(); i != trans.end(); ++i){
-                qDebug()<<"aplicando una transformacion";
                 (*i)->Transform();
             }
             //draw shape
