@@ -135,7 +135,13 @@ void Translate::GenerateCode(Viewport *v){
     }
 }
 
-void Rotate::GenerateCode(Viewport *v){}
+void Rotate::GenerateCode(Viewport *v){
+
+    Vect3d* myVect = (Vect3d*)this->axis->value;
+    float f = ((Float*)this->angle->value)->f;
+    v->addTransform(*id,new IRotate(f,myVect->x,myVect->y,myVect->z));
+}
+
 void Scale::GenerateCode(Viewport *v){
 
     Identifier* myId = symbols.value(*id);

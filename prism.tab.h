@@ -47,7 +47,7 @@
      ROTAR = 265,
      TRASLADAR = 266,
      ESCALAR = 267,
-     SOBRE = 268,
+     EJE = 268,
      FONDO = 269,
      PTO_FLOT = 270,
      COLOR = 271,

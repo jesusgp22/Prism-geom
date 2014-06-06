@@ -58,8 +58,8 @@ Escalar 	{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 Trasladar	{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 									return TRASLADAR;}
 
-Sobre	{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
-									return SOBRE;}
+Eje	{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
+                                                                        return EJE;}
 
 Flotante	{tokens +=  "<PAL_RES>, \" " ;tokens += yytext; tokens += "\"\n";
 									return FLOTANTE;}

@@ -60,8 +60,6 @@ void Viewport::initializeGL(){
     }else{
         //allow for color material
         glEnable(GL_COLOR_MATERIAL);
-        //reduce line width for 3d
-        glLineWidth(2);
 
         //allow depth testing
         glEnable( GL_DEPTH_TEST);

@@ -51,7 +51,7 @@
 }
 
 %token INICIO FIN ESCENA _2D _3D
-%token DIBUJAR RELLENAR ROTAR TRASLADAR ESCALAR SOBRE FONDO
+%token DIBUJAR RELLENAR ROTAR TRASLADAR ESCALAR EJE FONDO
 %token <fval>PTO_FLOT
 %token COLOR VECT2D VECT3D FLOTANTE
 %token PUNTO RECTA CURVA PLANO TRIANGULO CUADRILATERO 
@@ -258,19 +258,14 @@ Rellenar : RELLENAR ID COLOR Param { $$ = new Fill($2,$4); check(*$2);
 }
 ;
 
-//TODO: NEW "PARAM" ADDED.
-
-Rotar : ROTAR ID SOBRE Param Param Param{ $$ = new Rotate($2,$4,$5);
+Rotar : ROTAR ID EJE Param Param { $$ = new Rotate($2,$4,$5);
     if(check(*$2))
     {
         Identifier* id = symbols.value(*$2);
         if(id->type == VECT2_DT||id->type == VECT3_DT || id->type == FLOAT_DT)
             yyerror("ERROR: Solo se pueden rotar figuras GEOM2D o GEOM3D");
-        else if(id->dimension == Identifier::GEOM2D && $4->type!=VECT2_DT){
-            yyerror("ERROR: El punto de rotacion ser un Vector2d" );
-        }else if(id->dimension == Identifier::GEOM3D && $4->type!=VECT3_DT){
-            yyerror("ERROR: El punto de rotacion debe ser un Vector3d" );
-        }
+        if($4->type!=VECT3_DT)
+            yyerror("ERROR: El eje de rotacion debe ser un Vector3d" );
         if($5->type!=FLOAT_DT)
             yyerror("ERROR: El parametro de rotacion debe ser un Flotante");
     }
