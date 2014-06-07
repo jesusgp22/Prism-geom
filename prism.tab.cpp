@@ -526,11 +526,11 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint16 yyrline[] =
 {
        0,    83,    83,    86,    89,    93,    94,    97,    98,    99,
-     102,   104,   106,   108,   111,   116,   122,   130,   136,   143,
-     151,   158,   164,   170,   177,   183,   190,   197,   204,   209,
-     210,   212,   214,   216,   220,   221,   222,   223,   224,   227,
-     228,   229,   230,   231,   232,   235,   247,   261,   275,   290,
-     305,   315,   318,   321
+     102,   104,   106,   108,   111,   116,   122,   135,   141,   148,
+     156,   163,   169,   175,   182,   188,   195,   202,   209,   214,
+     215,   217,   219,   221,   225,   226,   227,   228,   229,   232,
+     233,   234,   235,   236,   237,   240,   252,   266,   280,   295,
+     310,   320,   323,   326
 };
 #endif
 
@@ -1724,13 +1724,18 @@ yyreduce:
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
                                     if((yyvsp[(6) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
                                     if((yyvsp[(8) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El punto \"c\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
+                                    Vect2d *a,*b,*c;
+                                    a = (Vect2d*)(yyvsp[(4) - (9)].param)->value;
+                                    b = (Vect2d*)(yyvsp[(6) - (9)].param)->value;
+                                    c = (Vect2d*)(yyvsp[(8) - (9)].param)->value;
+                                    if(!((a->x<b->x) && (b->x < c->x ))){yyerror("ERROR: La coordenada x de los puntos debe estar ordenada de menor a mayor");}
                                     }
     break;
 
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 130 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 135 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),PLANE_DT,new Plane((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT3_DT){yyerror("ERROR: El centro debe ser Vector3d\nPrototipo: Plano {Vector2d centro,Flotante lado}");}
@@ -1741,7 +1746,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 136 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 141 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),TRIANGLE_DT,new Triangle((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Triangulo {Vector2d a,Vector2d b,Vector2d c}");}
@@ -1753,7 +1758,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 143 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 148 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (11)].string));
                                     check_or_insert(*(yyvsp[(2) - (11)].string),QUAD_DT,new Quad((yyvsp[(4) - (11)].param),(yyvsp[(6) - (11)].param),(yyvsp[(8) - (11)].param),(yyvsp[(10) - (11)].param)));
                                     if((yyvsp[(4) - (11)].param)->type!=VECT2_DT){yyerror("ERROR: El vertice \"a\" debe ser Vector2d\nPrototipo: Cuadrilatero {Vector2d a,Vector2d b,Vector2d c,Vector2d d}");}
@@ -1766,7 +1771,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 151 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 156 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),ELIPSE_DT,new Elipse((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Elipse {Vector2d centro,Flotante ancho,Flotante altura}");}
@@ -1778,7 +1783,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 158 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 163 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),CIRC_DT,new Circ((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El centro debe ser Vector2d\nPrototipo: Circunferencia {Vector2d centro,Flotante radio}");}
@@ -1789,7 +1794,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 164 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 169 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),PARABOLE_DT,new Parabole((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT2_DT){yyerror("ERROR: El punto minimo debe ser Vector2d\nPrototipo: Parabola {Vector2d punto_minimo,Flotante factor_multiplicativo}");}
@@ -1800,7 +1805,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 170 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 175 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),HYPERBOLE_DT,new Hyperbole((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT2_DT){yyerror("ERROR: El foco debe ser Vector2d\nPrototipo: Hiperbola {Vector2d foco,Flotante factor_multiplicativo,Flotante distancia_focal}");}
@@ -1812,7 +1817,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 177 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 182 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),POLYHEDRON_DT,new Polyhedron((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=FLOAT_DT){yyerror("ERROR: El numero de caras debe ser Flotante\nPrototipo: Poliedro {Flotante num_caras,Flotante num_lados}");}
@@ -1823,7 +1828,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 183 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 188 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CYLINDRE_DT,new Cylindre((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cilindro {Vector3d centro,Flotante altura,Flotante radio}");}
@@ -1835,7 +1840,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 190 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 195 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (9)].string));
                                     check_or_insert(*(yyvsp[(2) - (9)].string),CONE_DT,new Cone((yyvsp[(4) - (9)].param),(yyvsp[(6) - (9)].param),(yyvsp[(8) - (9)].param)));
                                     if((yyvsp[(4) - (9)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Cono {Vector3d centro,Flotante altura,Flotante radio}");}
@@ -1847,7 +1852,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 197 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 202 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.declaration) = new Declaration((yyvsp[(2) - (7)].string));
                                     check_or_insert(*(yyvsp[(2) - (7)].string),SPHERE_DT,new Sphere((yyvsp[(4) - (7)].param),(yyvsp[(6) - (7)].param)));
                                     if((yyvsp[(4) - (7)].param)->type!=VECT3_DT){yyerror("ERROR: El centro de la base ser Vector3d\nPrototipo: Esfera {Vector3d centro,Flotante radio}");}
@@ -1858,7 +1863,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 204 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 209 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.asignation) = new Asignation((yyvsp[(1) - (3)].string),(yyvsp[(3) - (3)].expresion));
                                 check(*(yyvsp[(1) - (3)].string));
                               }
@@ -1867,14 +1872,14 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 209 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 214 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new ParamExpresion((yyvsp[(1) - (1)].param));}
     break;
 
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 210 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 215 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Plus((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
                                 if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la suma no concuerdan");} }
     break;
@@ -1882,7 +1887,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 212 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 217 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Less((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
                                 if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la resta no concuerdan");} }
     break;
@@ -1890,7 +1895,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 214 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 219 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Times((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
                                 if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la multiplicacion no concuerdan");} }
     break;
@@ -1898,7 +1903,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 216 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 221 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.expresion) = new Division((yyvsp[(1) - (3)].param),(yyvsp[(3) - (3)].param));
                                 if((yyvsp[(1) - (3)].param)->type != (yyvsp[(3) - (3)].param)->type){yyerror("ERROR: Los parametros de la division no concuerdan");} }
     break;
@@ -1906,84 +1911,84 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 220 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 225 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(COLOR_DT,(void*)(yyvsp[(1) - (1)].color));}
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 221 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 226 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(FLOAT_DT,(void*)new Float(*(yyvsp[(1) - (1)].fval)));}
     break;
 
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 222 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 227 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(VECT2_DT,(void*)(yyvsp[(1) - (1)].vect2d));}
     break;
 
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 223 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 228 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.param)= new Param(VECT3_DT,(void*)(yyvsp[(1) - (1)].vect3d));}
     break;
 
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 224 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 229 "/home/jesus/Workspace/Prism-geom/prism.y"
     { if(check(*(yyvsp[(1) - (1)].string))) {(yyval.param) = new Param((yyvsp[(1) - (1)].string));} else{ (yyval.param) = new Param(); } }
     break;
 
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 227 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 232 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].draw);}
     break;
 
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 228 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 233 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].fill);}
     break;
 
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 229 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 234 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].rotate);}
     break;
 
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 230 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 235 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].translate);}
     break;
 
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 231 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 236 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)=(yyvsp[(1) - (1)].scale);}
     break;
 
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 232 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 237 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.function)= new Background((yyvsp[(2) - (2)].param));}
     break;
 
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 235 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 240 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.draw) = new Draw((yyvsp[(2) - (4)].string),(yyvsp[(4) - (4)].param));
     if(check(*(yyvsp[(2) - (4)].string)))
     {
@@ -1999,7 +2004,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 247 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 252 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.fill) = new Fill((yyvsp[(2) - (4)].string),(yyvsp[(4) - (4)].param)); check(*(yyvsp[(2) - (4)].string));
     if(check(*(yyvsp[(2) - (4)].string)))
     {
@@ -2017,7 +2022,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 261 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 266 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.rotate) = new Rotate((yyvsp[(2) - (5)].string),(yyvsp[(4) - (5)].param),(yyvsp[(5) - (5)].param));
     if(check(*(yyvsp[(2) - (5)].string)))
     {
@@ -2035,7 +2040,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 275 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 280 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.scale) = new Scale((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].param));
 if(check(*(yyvsp[(2) - (3)].string)))
 {
@@ -2054,7 +2059,7 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 290 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 295 "/home/jesus/Workspace/Prism-geom/prism.y"
     { (yyval.translate) = new Translate((yyvsp[(2) - (3)].string),(yyvsp[(3) - (3)].param));
     if(check(*(yyvsp[(2) - (3)].string)))
     {
@@ -2073,7 +2078,7 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 305 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 310 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.color)=new Color(*(yyvsp[(2) - (9)].fval),*(yyvsp[(4) - (9)].fval),*(yyvsp[(6) - (9)].fval),*(yyvsp[(8) - (9)].fval));
                                                                 if(*(yyvsp[(2) - (9)].fval)<0||*(yyvsp[(2) - (9)].fval)>1)
                                                                     yyerror("ERROR: El componente de rojo del color debe estar entre 0 y 1");
@@ -2089,28 +2094,28 @@ if(check(*(yyvsp[(2) - (3)].string)))
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 315 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 320 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.color)=new Color((yyvsp[(1) - (1)].string));}
     break;
 
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 318 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 323 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.vect2d)=new Vect2d(*(yyvsp[(2) - (5)].fval),*(yyvsp[(4) - (5)].fval));}
     break;
 
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 321 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 326 "/home/jesus/Workspace/Prism-geom/prism.y"
     {(yyval.vect3d)=new Vect3d(*(yyvsp[(2) - (7)].fval),*(yyvsp[(4) - (7)].fval),*(yyvsp[(6) - (7)].fval));}
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 2114 "/home/jesus/Workspace/Prism-geom/prism.tab.cpp"
+#line 2119 "/home/jesus/Workspace/Prism-geom/prism.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2341,7 +2346,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 324 "/home/jesus/Workspace/Prism-geom/prism.y"
+#line 329 "/home/jesus/Workspace/Prism-geom/prism.y"
  
 
 void check_or_insert(QString name,DATATYPE t,DataType * value){
@@ -2372,8 +2377,8 @@ int yywrap()
 
 void yyerror(const char *s){
     errors++;
-    syntax+="En la linea ";
-    syntax+=QString::number(line);
+    //syntax+="En la linea ";
+    //syntax+=QString::number(line);
     syntax+=":  ";
     if(strcmp (s,"syntax error")==0)
         syntax+="ERROR: Error de sintaxis ";

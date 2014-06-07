@@ -124,6 +124,11 @@ Declaracion : FLOTANTE ID PTO_FLOT {$$ = new Declaration($2);
                                     if($4->type!=VECT2_DT){yyerror("ERROR: El punto \"a\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
                                     if($6->type!=VECT2_DT){yyerror("ERROR: El punto \"b\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
                                     if($8->type!=VECT2_DT){yyerror("ERROR: El punto \"c\" debe ser Vector2d\nPrototipo: Curva {Vector2d a,Vector2d b,Vector2d c}");}
+                                    Vect2d *a,*b,*c;
+                                    a = (Vect2d*)$4->value;
+                                    b = (Vect2d*)$6->value;
+                                    c = (Vect2d*)$8->value;
+                                    if(!((a->x<b->x) && (b->x < c->x ))){yyerror("ERROR: La coordenada x de los puntos debe estar ordenada de menor a mayor");}
                                     }
 
 
@@ -351,9 +356,9 @@ int yywrap()
 
 void yyerror(const char *s){
     errors++;
-    syntax+="En la linea ";
-    syntax+=QString::number(line);
-    syntax+=":  ";
+    //syntax+="En la linea ";
+    //syntax+=QString::number(line);
+    //syntax+=":  ";
     if(strcmp (s,"syntax error")==0)
         syntax+="ERROR: Error de sintaxis ";
     else

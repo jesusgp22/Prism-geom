@@ -436,10 +436,11 @@ public:
 
         //spline calculation
         std::vector<double> xs(3);
+        std::vector<double> ys(3);
+
         xs[0]=curve->a->x;
         xs[1]=curve->b->x;
         xs[2]=curve->c->x;
-        std::vector<double> ys(3);
         ys[0]=curve->a->y;
         ys[1]=curve->b->y;
         ys[2]=curve->c->y;
