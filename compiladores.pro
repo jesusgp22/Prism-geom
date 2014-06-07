@@ -19,8 +19,7 @@ SOURCES +=\
     lex.yy.cpp \
     viewport.cpp \
     viewer.cpp \
-    ast.cpp \
-    spline.cpp
+    ast.cpp
 
 HEADERS  += mainwindow.h \
     prism.tab.h \

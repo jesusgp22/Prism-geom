@@ -435,32 +435,25 @@ public:
         initialized = true;
 
         //spline calculation
-        vector<double> xs;
-        xs.push_back(curve->a->x);
-        xs.push_back(curve->b->x);
-        xs.push_back(curve->c->x);
-        vector<double> ys;
-        ys.push_back(curve->a->y);
-        ys.push_back(curve->b->y);
-        ys.push_back(curve->c->y);
+        std::vector<double> xs(3);
+        xs[0]=curve->a->x;
+        xs[1]=curve->b->x;
+        xs[2]=curve->c->x;
+        std::vector<double> ys(3);
+        ys[0]=curve->a->y;
+        ys[1]=curve->b->y;
+        ys[2]=curve->c->y;
 
-        vector<SplineSet> cs = CalculateSpline(xs,ys);
+        tk::spline mySpline;
+        mySpline.set_points(xs,ys);
 
-        //vertex calculation
-        float x,y,t;
-        float numSteps = 5;
-        float stepSize;
+        //calculate integration range
+        float startPoint = curve->a->x;
+        float stepSize = (curve->c->x-curve->a->x)/(NUM_STEPS);
 
-        for(int i=0;i<cs.size();i++){
-            qDebug()<<cs[i].d<<cs[i].c<<cs[i].b<<cs[i].a<<cs[i].x;
-            stepSize = 0.4/numSteps;
-            for(int j=0;j<numSteps;j++){
-                t = j*stepSize;
-                x = j*stepSize+i*0.4;
-                y = cs[i].d*(t*t*t) + cs[i].c*t*t + cs[i].b*t + cs[i].a;
-                qDebug()<<t<<","<<y;
-                verts.append(new QVector2D(x,y));
-            }
+        for(int i=0;i<NUM_STEPS+1;i++){
+            float t = startPoint + stepSize*i;
+            verts.append(new QVector2D(t,mySpline(t)));
         }
     }
 
