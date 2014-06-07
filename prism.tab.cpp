@@ -2379,7 +2379,7 @@ void yyerror(const char *s){
     errors++;
     //syntax+="En la linea ";
     //syntax+=QString::number(line);
-    syntax+=":  ";
+    //syntax+=":  ";
     if(strcmp (s,"syntax error")==0)
         syntax+="ERROR: Error de sintaxis ";
     else
