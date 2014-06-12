@@ -70,7 +70,7 @@ void Viewport::initializeGL(){
         //enable lightning
         glEnable(GL_LIGHTING);
         //set up the light
-        GLfloat lightpos[] = {.5, 1., 1., 0.};
+        GLfloat lightpos[] = {.5, 0., 1., 0.};
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
         glEnable(GL_LIGHT0);
     }
