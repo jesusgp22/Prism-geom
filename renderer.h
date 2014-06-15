@@ -572,4 +572,17 @@ public:
     }
 };
 
+class CubeRenderer: public Renderer{
+public:
+    CubeRenderer(){}
+
+    void DrawShape(){
+        glutWireCube(1);
+    }
+    void FillShape(){
+        glutSolidCube(1);
+    }
+
+};
+
 #endif // RENDERER_H

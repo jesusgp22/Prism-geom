@@ -1,0 +1,10 @@
+Inicio 
+Escena 3D
+
+Esfera miEsfera {
+(0,0,0),
+1
+};
+
+Rellenar miEsfera Color (1,0,0,0.5);
+Fin

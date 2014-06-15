@@ -1,0 +1,12 @@
+Inicio Escena 3d
+
+Cilindro q { (0,0,1) , 0.4, 0.5 };
+Cilindro q1 { (0,0,0) , 0.4, 0.5 };
+Cilindro q2 { (0,0,-1) , 0.4, 0.5 };
+
+Rellenar q Color (0.1,1,0.5,1);
+Rellenar q1 Color (01,0,0.5,1);
+Rellenar q2 Color (0,0,1,1);
+
+
+Fin

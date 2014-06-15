@@ -1,13 +1,14 @@
-Inicio
+Inicio Escena 3d
 
-Fondo GRIS;
-	
-Flotante radioBase 10;
-Flotante altura 20;
-Vector3d posicion (0,0,0);
-Vector3d vectorUp (0,1,0);
+Cono c { (0,0,0), 1 , 1};
+Cilindro c1 { (0,0,-1) , 1 , 1 };
 
-Cono miCono {posicion,radioBase,altura};
-Dibujar miCono;
+Dibujar c Color NARANJA;
+Dibujar c1 Color NARANJA;
+
+Fondo NEGRO;
+Rotar c1 Eje (1,0,0) 45;
+Rotar c Eje (1,0,0) 45;
+Rotar c Eje (1,0,0) 180;
 
 Fin

@@ -96,6 +96,11 @@ void Declaration::GenerateCode(Viewport *v){
             Renderer* r = new PlaneRenderer(p);
             v->addRenderer(*id,r);
             break;
+        }case POLYHEDRON_DT:
+        {
+            Renderer* r = new CubeRenderer();
+            v->addRenderer(*id,r);
+            break;
         }
         default:
             qDebug()<<"Nada que hacer para este tipo de dato";

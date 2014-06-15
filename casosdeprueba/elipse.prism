@@ -1,0 +1,22 @@
+Inicio
+
+Elipse e { (0,0) , 0.25, 0.5 };
+Circunferencia c { (0,0) , 0.25 };
+Elipse h { (0,0) , 0.5, 0.25 };
+
+Dibujar e Color NEGRO;
+
+Dibujar c Color NEGRO;
+
+Rellenar h Color (0,0.7,0.1,0.7);
+Dibujar h Color NEGRO;
+
+Parabola p { (0,0) , 0.3 };
+Dibujar p Color NEGRO;
+
+Trasladar c (1,0);
+Escalar c(0.5,0.5);
+
+
+
+Fin

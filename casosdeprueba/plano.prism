@@ -1,0 +1,7 @@
+Inicio
+
+Plano p { (0,0,0) , 1  };
+Rellenar p Color CIAN;
+
+Rotar p Eje (1,0,0) 45;
+Fin

@@ -40,7 +40,7 @@ void MainWindow::on_actionNuevo_triggered()
 
 void MainWindow::on_actionAbrir_triggered()
 {
-    QString archivo = QFileDialog ::getOpenFileName(this,"Abrir un Archivo");
+    QString archivo = QFileDialog ::getOpenFileName(this,"Abrir archivo","/home/jesus/Workspace/Prism-geom/casosdeprueba/","*.prism");
 
     if(!archivo.isEmpty())
     {

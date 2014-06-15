@@ -1,0 +1,10 @@
+Inicio 
+
+Hiperbola hiper { (0,0), 0.7 , 0.1 };
+Dibujar hiper Color NEGRO;
+Rellenar hiper Color NARANJA;
+
+Escalar hiper (3,1);
+Rotar hiper Eje (0,0,1) 90;
+
+Fin

@@ -1,0 +1,11 @@
+Inicio
+
+Vector2d posicion (0,0);
+
+Punto p {posicion};
+Recta r { (0,0), (0.1,0.2) };
+Dibujar r Color NEGRO;
+
+Dibujar p Color VERDE;
+
+Fin

@@ -1,0 +1,8 @@
+Inicio Escena 3d
+
+Poliedro cubo {4,6};
+Dibujar cubo Color NEGRO;
+Rellenar cubo Color (0,1,0,0.5);
+Rotar cubo Eje (0,0,1) 45;
+
+Fin

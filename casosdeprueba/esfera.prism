@@ -1,9 +1,20 @@
-Inicio Escena 3D
-Fondo NEGRO;
+Inicio Escena 3d
 
-Vector3d centro (0,0,0);
-Esfera miEsfera {centro,2};
+Esfera e { (-0.3,0,0) , 0.5 };
 
-Dibujar miEsfera Color GRIS;
+Esfera c1{ (0.1,0,1) , 0.5 };
+
+Esfera c2{ (0.5,0.2,-1) , 0.3 };
+
+Esfera e3{ (2,-0.3,-0.7) , 0.7 };
+
+Rellenar e Color VERDE;
+
+Rellenar c1 Color (1,0,0,0.5);
+
+Rellenar c2 Color CIAN;
+
+Dibujar e3 Color VERDE;
+
 
 Fin

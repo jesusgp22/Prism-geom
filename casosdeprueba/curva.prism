@@ -1,0 +1,29 @@
+Inicio
+
+Vector2d pa (0.1,-1);
+Vector2d pb (0.6,0.5);
+Vector2d pc (0.9,-0.5);
+
+Curva c { (0,0.1), (0.4,0.5), (0.7,-0.1)};
+Dibujar c Color (1,1,0,0.6);
+
+Punto p { (0,0.1)};
+Punto p1 {(0.4,0.5)};
+Punto p2 { (0.7,-0.1) };
+
+Dibujar p Color ROJO;
+Dibujar p1 Color ROJO;
+Dibujar p2 Color ROJO;
+
+Curva c1 {pa,pb,pc};
+Dibujar c1 Color (0,1,1,0.7);
+
+Punto p3 { pa};
+Punto p4 { pb };
+Punto p5 { pc };
+
+Dibujar p3 Color ROJO;
+Dibujar p4 Color ROJO;
+Dibujar p5 Color ROJO;
+
+Fin

@@ -1,0 +1,14 @@
+Inicio Escena 2d
+
+Circunferencia a1 { (-0.3,0) , 0.4 };
+Circunferencia a2  { (0,0.4)  , 0.4 };
+Circunferencia a3 { (0.3,0)  , 0.4 };
+Hiperbola h { (0,0), 1, 1 } ;
+Rellenar a1 Color (1,0,0,0.5);
+Rellenar a2 Color (0,1,0,0.5);
+Rellenar a3 Color (0,0,1,0.5);
+Dibujar h Color AZUL;
+
+Rotar h Eje (0,0,1) 90;
+
+Fin
